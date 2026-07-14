@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -26,6 +27,8 @@ REQUIRED_FIELDS = (
 )
 VALID_DISTRIBUTIONS = {"vendored", "external"}
 VALID_STATUSES = {"recommended", "maintained", "deprecated", "unverified"}
+INSTALLABLE_STATUSES = {"recommended", "maintained"}
+SKILL_ID_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 
 def _label(record: dict[str, Any], index: int) -> str:
@@ -103,6 +106,38 @@ def validate_catalog(repo_root: Path, catalog_path: Path) -> list[str]:
     return errors
 
 
+def resolve_installable_skill(
+    repo_root: Path, catalog_path: Path, skill_id: str
+) -> tuple[Path | None, str | None]:
+    """解析允许由本仓库安装的 Skill，并返回安全的绝对源路径。"""
+
+    if not SKILL_ID_PATTERN.fullmatch(skill_id):
+        return None, "Skill ID 只能包含小写字母、数字和连字符。"
+
+    errors = validate_catalog(repo_root, catalog_path)
+    if errors:
+        return None, "目录无效，拒绝安装：" + "；".join(errors)
+
+    data = yaml.safe_load(catalog_path.read_text(encoding="utf-8"))
+    record = next((item for item in data["skills"] if item["id"] == skill_id), None)
+    if record is None:
+        return None, f"目录中不存在 Skill：{skill_id}。"
+    if record["distribution"] != "vendored":
+        return None, f"{skill_id} 是外部 Skill，请使用目录中的官方安装方式。"
+    if record["status"] not in INSTALLABLE_STATUSES:
+        return None, f"{skill_id} 当前状态为 {record['status']}，仓库安装器拒绝安装。"
+
+    skills_root = (repo_root / "skills").resolve()
+    source = (skills_root / skill_id).resolve()
+    try:
+        source.relative_to(skills_root)
+    except ValueError:
+        return None, "解析后的 Skill 路径越过仓库 skills 目录。"
+    if not (source / "SKILL.md").is_file():
+        return None, f"{skill_id} 缺少 SKILL.md。"
+    return source, None
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -112,6 +147,11 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         help="待校验的目录文件（默认：catalog/skills.yaml）",
     )
+    parser.add_argument(
+        "--resolve",
+        metavar="SKILL_ID",
+        help="输出允许安装的仓库内 Skill 绝对路径；不可安装时退出 1。",
+    )
     args = parser.parse_args(argv)
 
     repo_root = Path(__file__).resolve().parents[1]
@@ -119,7 +159,16 @@ def main(argv: list[str] | None = None) -> int:
     if not catalog_path.is_absolute():
         catalog_path = Path.cwd() / catalog_path
 
-    errors = validate_catalog(repo_root, catalog_path.resolve())
+    catalog_path = catalog_path.resolve()
+    if args.resolve:
+        source, error = resolve_installable_skill(repo_root, catalog_path, args.resolve)
+        if error:
+            print(error, file=sys.stderr)
+            return 1
+        print(source)
+        return 0
+
+    errors = validate_catalog(repo_root, catalog_path)
     if errors:
         print("Skill 目录校验失败：", file=sys.stderr)
         for error in errors:
