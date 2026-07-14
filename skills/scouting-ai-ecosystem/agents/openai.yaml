@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI 生态情报雷达"
+  short_description: "定期发现并评估 Agent、Skill、MCP 与 AI 平台项目"
+  default_prompt: "使用 $scouting-ai-ecosystem 搜集并评估近期值得关注的 AI 生态项目。"
