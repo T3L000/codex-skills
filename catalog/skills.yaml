@@ -451,14 +451,14 @@ skills:
   - id: scouting-ai-ecosystem
     name: Scouting AI Ecosystem
     category: research
-    distribution: external
+    distribution: vendored
     purpose: 定期发现、比较和跟踪 Agent、Skill、MCP、RAG 与 AI Native 平台项目。
-    upstream: 本仓库作者自有，待入库
-    repository: null
+    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/scouting-ai-ecosystem
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/scouting-ai-ecosystem
     install:
-      repository: 待同步到本仓库后由安全安装器安装。
+      repository: .\scripts\install-skill.ps1 -Name scouting-ai-ecosystem
     license: 未声明
-    status: unverified
+    status: recommended
     replaced_by: null
     replacement_reason: null
     dependencies:
