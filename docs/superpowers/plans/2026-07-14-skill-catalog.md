@@ -162,7 +162,7 @@ git commit -m "docs: add structured skill catalog"
 - 新建：`skills/scouting-ai-ecosystem/references/sources-and-rubric.md`
 
 **接口：**
-- 来源：`C:\Users\PC\.codex\skills\scouting-ai-ecosystem`，但提交内容中不得出现该绝对路径。
+- 来源：当前用户 Codex Skill 目录中的 `scouting-ai-ecosystem`，但提交内容中不得出现本机绝对路径。
 - 目标：`skills/scouting-ai-ecosystem`。
 
 - [ ] **步骤 1：复制完整 Skill**
