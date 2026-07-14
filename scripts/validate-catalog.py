@@ -51,12 +51,14 @@ def validate_catalog(repo_root: Path, catalog_path: Path) -> list[str]:
         return ["目录根节点必须是包含 skills 列表的对象。"]
 
     seen_ids: set[str] = set()
+    records: list[dict[str, Any]] = []
     for index, raw_record in enumerate(data["skills"]):
         if not isinstance(raw_record, dict):
             errors.append(f"第 {index + 1} 条记录必须是对象。")
             continue
 
         record: dict[str, Any] = raw_record
+        records.append(record)
         label = _label(record, index)
         for field in REQUIRED_FIELDS:
             if field not in record or _is_empty(record[field]):
@@ -89,6 +91,13 @@ def validate_catalog(repo_root: Path, catalog_path: Path) -> list[str]:
         ):
             errors.append(
                 f"{label}：deprecated 记录必须填写 replaced_by 或 replacement_reason。"
+            )
+
+    for index, record in enumerate(records):
+        replacement = record.get("replaced_by")
+        if replacement and replacement not in seen_ids:
+            errors.append(
+                f"{_label(record, index)}：replaced_by 指向不存在的记录 {replacement!r}。"
             )
 
     return errors

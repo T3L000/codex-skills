@@ -116,6 +116,73 @@ class ValidateCatalogTests(unittest.TestCase):
 
         self.assertTrue(any("distribution" in error and "remote" in error for error in errors))
 
+    def test_replacement_target_must_exist(self) -> None:
+        path = self.write_records(
+            [
+                self.valid_record(
+                    status="deprecated",
+                    replaced_by="missing-replacement",
+                    replacement_reason="使用新实现。",
+                )
+            ]
+        )
+
+        errors = self.validator.validate_catalog(self.repo_root, path)
+
+        self.assertTrue(
+            any("replaced_by" in error and "missing-replacement" in error for error in errors)
+        )
+
+
+class RepositoryCatalogTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.validator = load_validator()
+        self.catalog_path = REPO_ROOT / "catalog" / "skills.yaml"
+
+    def load_records(self) -> list[dict[str, object]]:
+        import yaml
+
+        data = yaml.safe_load(self.catalog_path.read_text(encoding="utf-8"))
+        return data["skills"]
+
+    def test_repository_catalog_is_valid(self) -> None:
+        self.assertEqual(
+            [],
+            self.validator.validate_catalog(REPO_ROOT, self.catalog_path),
+        )
+
+    def test_repository_catalog_covers_original_skills(self) -> None:
+        original_ids = {
+            "brainstorming",
+            "code-review-and-quality",
+            "docx",
+            "drawio-skill",
+            "hatch-pet",
+            "mcp-builder",
+            "planning-with-files",
+            "ppt-master",
+            "project-memory",
+            "systematic-debugging",
+            "test-driven-development",
+            "ui-ux-pro-max",
+            "using-superpowers",
+            "verification-before-completion",
+            "webapp-testing",
+            "web-design-guidelines",
+            "writing-plans",
+            "xlsx",
+        }
+        catalog_ids = {str(record["id"]) for record in self.load_records()}
+        self.assertTrue(original_ids <= catalog_ids)
+
+    def test_repository_catalog_has_external_and_replacement_records(self) -> None:
+        records = self.load_records()
+        self.assertTrue(any(record["distribution"] == "external" for record in records))
+        self.assertTrue(
+            any(record.get("replaced_by") for record in records),
+            "目录应显式记录至少一项替代关系。",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
