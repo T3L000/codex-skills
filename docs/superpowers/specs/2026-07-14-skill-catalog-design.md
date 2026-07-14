@@ -19,6 +19,7 @@
 2. 只复制由本仓库作者创建或明确决定在本仓库维护的 Skill。
 3. 第三方 Skill 只记录可信上游来源和安装方式；未完成来源与许可证核验时，不复制其代码。
 4. 同时提供方便人阅读的文档和方便程序处理的结构化元数据。
+5. 定期审计仓库现有 Skill；发现失效、重复、上游停更或出现明显更优替代品时，更新记录并提供迁移方案。
 
 这种方式既能将仓库作为个人备份和安装入口，也能避免仓库变成来源不清、更新滞后的第三方代码镜像。
 
@@ -80,6 +81,9 @@ skills/
     windows: "官方安装命令或文档链接"
     macos_linux: "官方安装命令或文档链接"
   license: "未声明"
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
   dependencies:
     - Chrome 或 Edge 扩展
     - Kimi WebBridge 本地服务
@@ -87,12 +91,39 @@ skills/
   verified_on: 2026-07-14
 ```
 
-必填字段包括 `id`、`name`、`category`、`distribution`、`purpose`、`upstream`、`install`、`license`、`risk_notes` 和 `verified_on`。
+必填字段包括 `id`、`name`、`category`、`distribution`、`purpose`、`upstream`、`install`、`license`、`status`、`risk_notes` 和 `verified_on`。
 
 `distribution` 只有两种取值：
 
 - `vendored`：代码已经保存在 `skills/<id>`，可以使用本仓库脚本安装。
 - `external`：本仓库只提供上游安装方法，安装脚本不会安装或执行第三方内容。
+
+`status` 采用以下取值：
+
+- `recommended`：当前优先推荐。
+- `maintained`：仍可使用，但不是同类首选。
+- `deprecated`：已不建议新装，并提供替代品或迁移说明。
+- `unverified`：尚未完成来源、兼容性或实际可用性核验。
+
+## 现有 Skill 审计与替代规则
+
+首次建设目录时，对仓库已有 18 个 Skill 进行静态审计和上游核验；后续维护时重复这一流程。
+
+审计维度包括：
+
+- `SKILL.md` 是否符合当前 Agent Skill 结构，引用文件是否存在。
+- 本机和当前 Codex 环境是否仍能发现、加载并执行该 Skill。
+- 上游仓库、官方产品或插件是否仍在维护。
+- 是否存在功能覆盖更完整、来源更可信或安全边界更清晰的替代品。
+- 安装依赖、远程脚本、权限和许可证是否仍然合理。
+
+处理方式：
+
+- 仓库自有 Skill 出现可修复问题时，直接更新并验证。
+- 外部 Skill 出现新版时，优先更新目录中的上游链接和安装说明；许可证允许且本仓库明确维护时才同步代码。
+- 出现明显更优替代品时，将旧项标为 `deprecated`，填写 `replaced_by`、`replacement_reason` 和迁移说明。
+- 存在严重安全、许可证或数据风险时，从默认推荐列表移除；是否删除已入库代码需要在变更记录中明确说明。
+- 不因为 Star 数量或宣传文章单独做替换决定，至少结合一手文档、维护活跃度和功能差异。
 
 ## 安装方案
 
@@ -124,6 +155,7 @@ skills/
 
 - 每个 `vendored` 记录都存在对应的 `skills/<id>/SKILL.md`。
 - Skill ID 不重复，所有必填字段都有值。
+- `deprecated` 记录必须提供 `replaced_by` 或明确的停止使用原因。
 - README 和 CATALOG 中的本地链接有效。
 - PowerShell 与 shell 安装脚本都能把测试 Skill 安装到临时目录。
 - 安装脚本会拒绝未知 Skill，并且在没有覆盖参数时拒绝替换已有目录。
