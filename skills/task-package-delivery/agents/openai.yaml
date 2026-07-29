@@ -1,0 +1,7 @@
+interface:
+  display_name: "任务包交付"
+  short_description: "按任务包实施、验收、差异审查并基于证据交付"
+  default_prompt: "Use $task-package-delivery to execute this task package, verify every acceptance criterion, review the changed diff, and report completion only with fresh evidence."
+
+policy:
+  allow_implicit_invocation: true

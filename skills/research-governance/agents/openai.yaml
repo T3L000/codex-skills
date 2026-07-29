@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Governance"
+  short_description: "Auditable enterprise research and governance workflow"
+  default_prompt: "Research this enterprise decision with primary sources, gates, evidence receipts, and independent-review boundaries."

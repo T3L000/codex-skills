@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Repair Coordinator"
+  short_description: "Coordinate review, repair, integration, and closeout loops"
+  default_prompt: "Use $coordinate-review-repair-loops to coordinate these implementation and review tasks until they reach auditable terminal states or a declared stop condition."
