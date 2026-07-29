@@ -1,6 +1,6 @@
 # Codex Skill 精选目录
 
-核验日期：2026-07-14。结构化事实源为 [`catalog/skills.yaml`](catalog/skills.yaml)；本页为方便阅读的摘要。外部项目会变化，安装前仍应打开上游确认最新版说明。
+核验日期：2026-07-29。结构化事实源为 [`catalog/skills.yaml`](catalog/skills.yaml)；本页为方便阅读的摘要。外部项目会变化，安装前仍应打开上游确认最新版说明。
 
 ## 快速选择
 
@@ -10,6 +10,10 @@
 | 控制真实浏览器 | `kimi-webbridge` | 需要可重复 CLI 自动化时用 `agent-browser`；调试本地 Web/Electron 时用 `playwright-interactive`。 |
 | 查最新开发文档 | `find-docs` | Context7 缺失或安全关键时，回到产品官方文档。 |
 | 软件工程全流程 | `superpowers` | 超过五次工具调用、需要跨会话状态时叠加 `planning-with-files-upstream`。 |
+| 交付任务包 | `task-package-delivery` | 单纯问答、小改动或只读诊断无需触发任务包流程。 |
+| 协调审查—修复闭环 | `coordinate-review-repair-loops` | 单一实施或单次审查直接使用对应执行/审查流程。 |
+| 决策级调研 | `research-governance` + `deep-research` | 前者管理证据、Gate 和决策边界，后者负责外部发现与核验。 |
+| 项目知识收尾 | `neat-freak` | 纯代码重构、普通数据整理或无项目知识语境的“整理”不使用。 |
 | 压力测试方案 | `grill-me` | 已有完整批准规格时直接进入计划或执行。 |
 | 架构改进 | `improve-codebase-architecture` | 先补领域模型和 ADR，再授权具体重构。 |
 | MCP Server | `mcp-builder` | 协议、SDK 与安全边界以 MCP 官方文档为准。 |
@@ -26,6 +30,10 @@
 | `web-design-guidelines` | recommended | 审查 UI、UX 和可访问性 | `./scripts/install-skill.ps1 -Name web-design-guidelines` | 会读取远程最新规则，应防范提示注入。 |
 | `hatch-pet` | maintained | 生成并校验 Codex 动画宠物图集 | `./scripts/install-skill.ps1 -Name hatch-pet` | 图像、品牌和商标素材需要授权。 |
 | `project-memory` | maintained | 保存轻量跨会话项目记忆 | `./scripts/install-skill.ps1 -Name project-memory` | 记忆文件可能含内部信息。 |
+| `task-package-delivery` | recommended | 按范围与验收合同实施、验证、审查并有界收敛 | `./scripts/install-skill.ps1 -Name task-package-delivery` | 不自动扩大提交、发布或破坏性操作权限。 |
+| `research-governance` | recommended | 将调研转成可审计的证据、Gate 与决策记录 | `./scripts/install-skill.ps1 -Name research-governance` | 调研通过不等于实施、采购或生产授权。 |
+| `neat-freak` | maintained | 对齐代码、运行态、文档、规则、记忆与残留 | `./scripts/install-skill.ps1 -Name neat-freak` | 发现清理候选不等于获得删除授权。 |
+| `coordinate-review-repair-loops` | maintained | 事件驱动协调实施、复审、修复和控制面收口 | `./scripts/install-skill.ps1 -Name coordinate-review-repair-loops` | 必须先冻结任务范围、权限和停止条件。 |
 
 macOS/Linux 将命令替换为：
 
@@ -53,6 +61,7 @@ macOS/Linux 将命令替换为：
 | `security-best-practices` | recommended | [OpenAI Skills](https://github.com/openai/skills/tree/main/skills/.curated/security-best-practices) | Codex **Plugins** 页面安装 | 只覆盖部分语言和框架，不替代威胁建模与渗透测试。 |
 | `playwright-interactive` | recommended | [OpenAI Skills](https://github.com/openai/skills/tree/main/skills/.curated/playwright-interactive) | Codex **Plugins** 页面安装，并按说明启用 `js_repl` | 当前可能要求降低沙箱限制，只在可信项目中使用。 |
 | `markdown-writer` | maintained | [TerminalSkills/skills](https://github.com/TerminalSkills/skills/tree/main/skills/markdown-writer) | `npx skills add TerminalSkills/skills --skill markdown-writer -g -a codex` | 示例命令和 URL 只是模板，发布前必须替换和验证。 |
+| `open-code-review-delegate` | recommended | [alibaba/open-code-review](https://github.com/alibaba/open-code-review) | 安装 `@alibaba-group/open-code-review`，再按上游 Delegation Mode 文档安装 Skill | OCR 只确定范围与规则，最终结论仍需宿主 Agent 独立复核。 |
 
 ## 弃用与迁移
 

@@ -27,11 +27,12 @@ if (-not $Destination) {
     }
 }
 
-$Source = (& python $Resolver $CatalogPath --resolve $Name 2>&1 | Out-String).Trim()
+$ResolverOutput = (& python $Resolver $CatalogPath --resolve $Name 2>&1 | Out-String).Trim()
 if ($LASTEXITCODE -ne 0) {
-    throw $Source
+    throw $ResolverOutput
 }
 
+$Source = Join-Path (Join-Path $RepoRoot 'skills') $Name
 $Source = [System.IO.Path]::GetFullPath($Source)
 $Destination = [System.IO.Path]::GetFullPath($Destination)
 $Target = Join-Path $Destination $Name

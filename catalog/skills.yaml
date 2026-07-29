@@ -669,3 +669,98 @@ skills:
     dependencies: []
     risk_notes: 示例中的命令和 URL 是模板内容，不能在未核对项目上下文时直接执行或发布。
     verified_on: "2026-07-14"
+
+  - id: task-package-delivery
+    name: Task Package Delivery
+    category: delivery-governance
+    distribution: vendored
+    purpose: 把带范围和验收标准的任务包作为交付合同，完成实施、逐项验证、差异审查和有界收敛。
+    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/task-package-delivery
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/task-package-delivery
+    install:
+      repository: .\scripts\install-skill.ps1 -Name task-package-delivery
+    license: 未声明（本仓库原创）
+    status: recommended
+    replaced_by: null
+    replacement_reason: null
+    dependencies: []
+    risk_notes: 任务包扩大验证深度但不扩大提交、推送、发布或破坏性操作权限；必须保留用户已有改动。
+    verified_on: "2026-07-29"
+
+  - id: neat-freak
+    name: Neat Freak
+    category: knowledge-governance
+    distribution: vendored
+    purpose: 在开发或发布收尾时对齐代码、运行态、文档、规则、获准维护的记忆和工作区残留。
+    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/neat-freak
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/neat-freak
+    install:
+      repository: .\scripts\install-skill.ps1 -Name neat-freak
+    license: 未声明（本仓库原创）
+    status: maintained
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - Git 和 rg（建议）
+      - Bash（可选，只用于 audit-inventory.sh）
+    risk_notes: 可发现删除和清场候选，但未获得用户看过完整汇报后的明确确认前不得执行破坏性清理。
+    verified_on: "2026-07-29"
+
+  - id: research-governance
+    name: Research Governance
+    category: research
+    distribution: vendored
+    purpose: 把会影响 WBS、路线图、架构或供应商决策的调研转成可审计证据、Gate、停止条件和独立复审记录。
+    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/research-governance
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/research-governance
+    install:
+      repository: .\scripts\install-skill.ps1 -Name research-governance
+    license: 未声明（本仓库原创）
+    status: recommended
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - deep-research（外部调研时）
+      - kimi-webbridge（真实浏览器场景）
+    risk_notes: 调研通过不等于技术选型、实施、采购或生产授权；动态事实必须记录快照和失效条件。
+    verified_on: "2026-07-29"
+
+  - id: coordinate-review-repair-loops
+    name: Coordinate Review and Repair Loops
+    category: project-control
+    distribution: vendored
+    purpose: 复用既有实施和独立审查任务，通过事件驱动等待协调修复、delta 复审、集成和控制面收口。
+    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/coordinate-review-repair-loops
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/coordinate-review-repair-loops
+    install:
+      repository: .\scripts\install-skill.ps1 -Name coordinate-review-repair-loops
+    license: 未声明（本仓库原创）
+    status: maintained
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - task-package-delivery
+      - open-code-review-delegate（Git 独立审查且项目规则要求时）
+      - Codex 任务协调工具
+    risk_notes: 只适用于用户明确授权的多任务持续协调；不得从“盯着直到完成”推导提交、推送、合并、文档改写或清理权限。
+    verified_on: "2026-07-29"
+
+  - id: open-code-review-delegate
+    name: Open Code Review Delegation Mode
+    category: code-review
+    distribution: external
+    purpose: 让 OCR 只负责确定性的文件筛选和规则解析，由宿主 Agent 使用自身模型完成独立代码审查。
+    upstream: https://github.com/alibaba/open-code-review
+    repository: https://github.com/alibaba/open-code-review
+    install:
+      npm: npm install -g @alibaba-group/open-code-review
+      codex: 按上游 Delegation Mode 文档安装 Skill；不要复制本仓库外的陈旧副本。
+    license: Apache-2.0
+    status: recommended
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - OCR CLI 1.7.11 或更高版本
+      - Git
+    risk_notes: preview/rule 只提供确定性审查范围和规则，不替代宿主 Agent 的业务合同复核、反例验证和独立结论。
+    verified_on: "2026-07-29"

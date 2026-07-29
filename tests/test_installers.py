@@ -32,7 +32,13 @@ class PowerShellInstallerTests(unittest.TestCase):
     def tearDown(self) -> None:
         self.temp_dir.cleanup()
 
-    def run_installer(self, name: str, *extra: str) -> subprocess.CompletedProcess[str]:
+    def run_installer(
+        self,
+        name: str,
+        *extra: str,
+        installer: Path = POWERSHELL_INSTALLER,
+        cwd: Path = REPO_ROOT,
+    ) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
             [
                 "powershell.exe",
@@ -40,14 +46,14 @@ class PowerShellInstallerTests(unittest.TestCase):
                 "-ExecutionPolicy",
                 "Bypass",
                 "-File",
-                str(POWERSHELL_INSTALLER),
+                str(installer),
                 "-Name",
                 name,
                 "-Destination",
                 str(self.destination),
                 *extra,
             ],
-            cwd=REPO_ROOT,
+            cwd=cwd,
             text=True,
             encoding="utf-8",
             errors="replace",
@@ -78,6 +84,53 @@ class PowerShellInstallerTests(unittest.TestCase):
         forced = self.run_installer("project-memory", "-Force")
         self.assertEqual(0, forced.returncode, forced.stderr)
         self.assertFalse(marker.exists())
+
+    def test_installs_from_unicode_repository_path(self) -> None:
+        unicode_repo = Path(self.temp_dir.name) / "中文技能仓库"
+        scripts_dir = unicode_repo / "scripts"
+        catalog_dir = unicode_repo / "catalog"
+        skill_dir = unicode_repo / "skills" / "sample-skill"
+        scripts_dir.mkdir(parents=True)
+        catalog_dir.mkdir()
+        skill_dir.mkdir(parents=True)
+
+        shutil.copy2(POWERSHELL_INSTALLER, scripts_dir / "install-skill.ps1")
+        shutil.copy2(
+            REPO_ROOT / "scripts" / "validate-catalog.py",
+            scripts_dir / "validate-catalog.py",
+        )
+        (skill_dir / "SKILL.md").write_text(
+            "---\nname: sample-skill\ndescription: Unicode path fixture\n---\n",
+            encoding="utf-8",
+        )
+        (catalog_dir / "skills.yaml").write_text(
+            """\
+schema_version: 1
+skills:
+  - id: sample-skill
+    name: Sample Skill
+    category: testing
+    distribution: vendored
+    purpose: 验证中文仓库路径安装。
+    upstream: https://example.com/sample-skill
+    install:
+      repository: install sample-skill
+    license: MIT
+    status: recommended
+    risk_notes: 仅用于测试。
+    verified_on: "2026-07-29"
+""",
+            encoding="utf-8",
+        )
+
+        result = self.run_installer(
+            "sample-skill",
+            installer=scripts_dir / "install-skill.ps1",
+            cwd=unicode_repo,
+        )
+
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertTrue((self.destination / "sample-skill" / "SKILL.md").is_file())
 
 
 @unittest.skipUnless(
