@@ -690,13 +690,13 @@ skills:
   - id: neat-freak
     name: Neat Freak
     category: knowledge-governance
-    distribution: vendored
+    distribution: external
     purpose: 在开发或发布收尾时对齐代码、运行态、文档、规则、获准维护的记忆和工作区残留。
-    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/neat-freak
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/neat-freak
+    upstream: https://github.com/KKKKhazix/khazix-skills/tree/main/neat-freak
+    repository: https://github.com/KKKKhazix/khazix-skills
     install:
-      repository: .\scripts\install-skill.ps1 -Name neat-freak
-    license: 未声明（本仓库原创）
+      repository: npx skills add KKKKhazix/khazix-skills --skill neat-freak -g -a codex
+    license: MIT（上游）
     status: maintained
     replaced_by: null
     replacement_reason: null

@@ -32,7 +32,6 @@
 | `project-memory` | maintained | 保存轻量跨会话项目记忆 | `./scripts/install-skill.ps1 -Name project-memory` | 记忆文件可能含内部信息。 |
 | `task-package-delivery` | recommended | 按范围与验收合同实施、验证、审查并有界收敛 | `./scripts/install-skill.ps1 -Name task-package-delivery` | 不自动扩大提交、发布或破坏性操作权限。 |
 | `research-governance` | recommended | 将调研转成可审计的证据、Gate 与决策记录 | `./scripts/install-skill.ps1 -Name research-governance` | 调研通过不等于实施、采购或生产授权。 |
-| `neat-freak` | maintained | 对齐代码、运行态、文档、规则、记忆与残留 | `./scripts/install-skill.ps1 -Name neat-freak` | 发现清理候选不等于获得删除授权。 |
 | `coordinate-review-repair-loops` | maintained | 事件驱动协调实施、复审、修复和控制面收口 | `./scripts/install-skill.ps1 -Name coordinate-review-repair-loops` | 必须先冻结任务范围、权限和停止条件。 |
 
 macOS/Linux 将命令替换为：
@@ -62,6 +61,7 @@ macOS/Linux 将命令替换为：
 | `playwright-interactive` | recommended | [OpenAI Skills](https://github.com/openai/skills/tree/main/skills/.curated/playwright-interactive) | Codex **Plugins** 页面安装，并按说明启用 `js_repl` | 当前可能要求降低沙箱限制，只在可信项目中使用。 |
 | `markdown-writer` | maintained | [TerminalSkills/skills](https://github.com/TerminalSkills/skills/tree/main/skills/markdown-writer) | `npx skills add TerminalSkills/skills --skill markdown-writer -g -a codex` | 示例命令和 URL 只是模板，发布前必须替换和验证。 |
 | `open-code-review-delegate` | recommended | [alibaba/open-code-review](https://github.com/alibaba/open-code-review) | 安装 `@alibaba-group/open-code-review`，再按上游 Delegation Mode 文档安装 Skill | OCR 只确定范围与规则，最终结论仍需宿主 Agent 独立复核。 |
+| `neat-freak` | maintained | [KKKKhazix/khazix-skills](https://github.com/KKKKhazix/khazix-skills/tree/main/neat-freak) | `npx skills add KKKKhazix/khazix-skills --skill neat-freak -g -a codex` | 上游采用 MIT；发现清理候选不等于获得删除授权。 |
 
 ## 弃用与迁移
 
