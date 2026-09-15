@@ -619,39 +619,39 @@ skills:
   - id: security-best-practices
     name: Security Best Practices
     category: security
-    distribution: external
+    distribution: vendored
     purpose: 对 Python、JavaScript/TypeScript 和 Go 项目执行语言与框架专项安全审查。
     upstream: https://github.com/openai/skills/tree/main/skills/.curated/security-best-practices
-    repository: https://github.com/openai/skills
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/security-best-practices
     install:
-      codex: 在 Codex Plugins 页面安装 security-best-practices。
-    license: 按 OpenAI Skills 条目声明
-    status: recommended
+      repository: 暂不建议从本仓库安装；本目录是本机许可核验后的归档副本。
+    license: Apache-2.0
+    status: unverified
     replaced_by: null
     replacement_reason: null
     dependencies: []
-    risk_notes: 只覆盖部分语言和框架；不能代替威胁建模、依赖扫描、渗透测试和人工安全评审。
-    verified_on: "2026-07-14"
+    risk_notes: 归档副本不会自动跟随上游更新；只覆盖部分语言和框架，不能代替威胁建模、依赖扫描、渗透测试和人工安全评审。
+    verified_on: "2026-09-15"
 
   - id: playwright-interactive
     name: Playwright Interactive
     category: browser-testing
-    distribution: external
+    distribution: vendored
     purpose: 在持久 Playwright 会话中迭代调试 Web 或 Electron 应用并完成视觉验收。
     upstream: https://github.com/openai/skills/tree/main/skills/.curated/playwright-interactive
-    repository: https://github.com/openai/skills
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/playwright-interactive
     install:
-      codex: 在 Codex Plugins 页面安装 playwright-interactive，并按说明启用 js_repl。
-    license: 按 OpenAI Skills 条目声明
-    status: recommended
+      repository: 暂不建议从本仓库安装；本目录是本机许可核验后的归档副本。
+    license: Apache-2.0
+    status: unverified
     replaced_by: null
     replacement_reason: null
     dependencies:
       - js_repl
       - Playwright
       - Chromium（网页测试）
-    risk_notes: 当前流程可能要求降低沙箱限制；只应在可信项目和隔离环境中启用。
-    verified_on: "2026-07-14"
+    risk_notes: 归档副本不会自动跟随上游更新；当前流程可能要求降低沙箱限制，只应在可信项目和隔离环境中启用。
+    verified_on: "2026-09-15"
 
   - id: markdown-writer
     name: Markdown Writer
@@ -764,3 +764,272 @@ skills:
       - Git
     risk_notes: preview/rule 只提供确定性审查范围和规则，不替代宿主 Agent 的业务合同复核、反例验证和独立结论。
     verified_on: "2026-07-29"
+
+  - id: audience-adapter
+    name: Audience Adapter
+    category: communication
+    distribution: vendored
+    purpose: 根据管理层、技术团队或运营受众调整汇报材料的粒度、语言和侧重点。
+    upstream: 本机安装副本，来源待核验
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/audience-adapter
+    install:
+      repository: 暂不建议安装；等待来源与兼容性复核。
+    license: MIT
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies: []
+    risk_notes: 只能调整表达方式，不能替代事实核验、审批或利益相关方确认。
+    verified_on: "2026-09-15"
+
+  - id: cloudflare-deploy
+    name: Cloudflare Deploy
+    category: deployment
+    distribution: vendored
+    purpose: 将应用和基础设施部署到 Cloudflare Workers、Pages 等服务。
+    upstream: https://github.com/openai/skills
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/cloudflare-deploy
+    install:
+      repository: 暂不建议安装；优先使用上游当前版本。
+    license: Apache-2.0
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - Cloudflare 账号与 CLI
+    risk_notes: 部署会改变外部服务状态；示例凭据均须替换为用户自己的安全配置。
+    verified_on: "2026-09-15"
+
+  - id: deep-probe
+    name: Deep Probe
+    category: product-thinking
+    distribution: vendored
+    purpose: 通过逐分支追问压力测试方案、设计与关键假设。
+    upstream: 本机安装副本，作者标记为 Matt Pocock，具体仓库待核验
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/deep-probe
+    install:
+      repository: 暂不建议安装；等待上游来源复核。
+    license: MIT
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies: []
+    risk_notes: 连环追问用于暴露未知项，不等于已经取得用户决策或实施授权。
+    verified_on: "2026-09-15"
+
+  - id: dws
+    name: DingTalk Workspace CLI
+    category: productivity
+    distribution: vendored
+    purpose: 管理钉钉文档、云盘、表格、日历、通讯录、消息、审批等工作空间能力。
+    upstream: DingTalk Workspace CLI，具体公开仓库待核验
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/dws
+    install:
+      repository: 暂不建议安装；需要钉钉账号、CLI 与权限配置。
+    license: Apache-2.0
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - DingTalk Workspace CLI
+      - 钉钉账号与相应权限
+    risk_notes: 可接触组织通讯录、消息、文档和审批数据；写操作必须确认目标和权限。
+    verified_on: "2026-09-15"
+
+  - id: idea-to-prd
+    name: Idea to PRD
+    category: product-management
+    distribution: vendored
+    purpose: 将一句话需求扩展为用户故事、功能清单、优先级和验收标准。
+    upstream: 本机安装副本，来源待核验
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/idea-to-prd
+    install:
+      repository: 暂不建议安装；等待来源与实践效果复核。
+    license: MIT
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies: []
+    risk_notes: 自动生成的 PRD 仍需业务负责人确认范围、约束和成功指标。
+    verified_on: "2026-09-15"
+
+  - id: jupyter-notebook
+    name: Jupyter Notebook
+    category: developer-tools
+    distribution: vendored
+    purpose: 创建和编辑用于实验、探索与教程的 Jupyter Notebook。
+    upstream: https://github.com/openai/skills
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/jupyter-notebook
+    install:
+      repository: 暂不建议安装；优先使用上游当前版本。
+    license: Apache-2.0
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - Python
+      - Jupyter
+    risk_notes: Notebook 可能包含大体积输出、执行副作用或敏感数据，提交前应清理。
+    verified_on: "2026-09-15"
+
+  - id: netlify-deploy
+    name: Netlify Deploy
+    category: deployment
+    distribution: vendored
+    purpose: 使用 Netlify CLI 部署、托管或关联 Web 项目。
+    upstream: https://github.com/openai/skills
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/netlify-deploy
+    install:
+      repository: 暂不建议安装；优先使用上游当前版本。
+    license: Apache-2.0
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - Netlify CLI 与账号
+    risk_notes: 生产部署和域名变更会影响外部用户，执行前需要确认环境与目标站点。
+    verified_on: "2026-09-15"
+
+  - id: pdf
+    name: PDF
+    category: documents
+    distribution: vendored
+    purpose: 读取、创建、渲染并校验版式敏感的 PDF 文件。
+    upstream: https://github.com/openai/skills
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/pdf
+    install:
+      repository: 暂不建议安装；优先使用 Codex 官方插件版本。
+    license: Apache-2.0
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - Python PDF 工具
+      - Poppler（渲染时）
+    risk_notes: 处理简历、合同等 PDF 时应避免把个人或业务敏感信息提交到公开仓库。
+    verified_on: "2026-09-15"
+
+  - id: playwright
+    name: Playwright
+    category: browser-testing
+    distribution: vendored
+    purpose: 通过 Playwright CLI 自动化网页导航、表单、截图和 UI 流程验证。
+    upstream: https://github.com/openai/skills
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/playwright
+    install:
+      repository: 暂不建议安装；优先使用上游当前版本。
+    license: Apache-2.0
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - Playwright
+      - 浏览器运行时
+    risk_notes: 浏览器会接触登录态和外部页面；提交、付款、发布等高影响操作需要单独确认。
+    verified_on: "2026-09-15"
+
+  - id: render-deploy
+    name: Render Deploy
+    category: deployment
+    distribution: vendored
+    purpose: 分析项目、生成 Render Blueprint 并辅助部署到 Render。
+    upstream: https://github.com/openai/skills
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/render-deploy
+    install:
+      repository: 暂不建议安装；优先使用上游当前版本。
+    license: Apache-2.0
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - Render 账号
+    risk_notes: Blueprint 和部署配置可能产生费用或暴露环境变量，发布前需要人工复核。
+    verified_on: "2026-09-15"
+
+  - id: screenshot
+    name: Screenshot
+    category: computer-use
+    distribution: vendored
+    purpose: 在工具内截图能力不可用时捕获桌面、窗口或指定区域。
+    upstream: https://github.com/openai/skills
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/screenshot
+    install:
+      repository: 暂不建议安装；优先使用上游当前版本。
+    license: Apache-2.0
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies: []
+    risk_notes: 截图可能捕获账号、通知和个人信息，分享或提交前必须检查画面内容。
+    verified_on: "2026-09-15"
+
+  - id: security-ownership-map
+    name: Security Ownership Map
+    category: security
+    distribution: vendored
+    purpose: 基于 Git 历史分析敏感代码所有权、关键人员和 bus factor。
+    upstream: https://github.com/openai/skills
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/security-ownership-map
+    install:
+      repository: 暂不建议安装；优先使用上游当前版本。
+    license: Apache-2.0
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - Git
+      - Python
+    risk_notes: 输出可能暴露人员关系和敏感模块归属，应限制传播范围并结合组织语境解释。
+    verified_on: "2026-09-15"
+
+  - id: security-threat-model
+    name: Security Threat Model
+    category: security
+    distribution: vendored
+    purpose: 基于仓库架构识别资产、信任边界、攻击路径和缓解措施。
+    upstream: https://github.com/openai/skills
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/security-threat-model
+    install:
+      repository: 暂不建议安装；优先使用上游当前版本。
+    license: Apache-2.0
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies: []
+    risk_notes: 威胁模型依赖当前架构和攻击面，不等同于渗透测试或安全认证。
+    verified_on: "2026-09-15"
+
+  - id: vercel-deploy
+    name: Vercel Deploy
+    category: deployment
+    distribution: vendored
+    purpose: 将应用部署到 Vercel 并返回预览或生产访问地址。
+    upstream: 本机安装副本，具体上游待核验
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/vercel-deploy
+    install:
+      repository: 暂不建议安装；等待上游来源和当前安装方式复核。
+    license: MIT
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies:
+      - Vercel 账号与 CLI
+    risk_notes: 部署可能影响公开站点、域名和费用；必须确认目标环境及授权范围。
+    verified_on: "2026-09-15"
+
+  - id: weighted-scoring
+    name: Weighted Scoring
+    category: decision-making
+    distribution: vendored
+    purpose: 用加权评分矩阵和敏感性分析比较技术、供应商与方案。
+    upstream: 本机安装副本，来源待核验
+    repository: https://github.com/T3L000/codex-skills/tree/main/skills/weighted-scoring
+    install:
+      repository: 暂不建议安装；等待来源与实践效果复核。
+    license: MIT
+    status: unverified
+    replaced_by: null
+    replacement_reason: null
+    dependencies: []
+    risk_notes: 分值不能代替证据质量；权重和评分假设需要由决策者确认并做敏感性分析。
+    verified_on: "2026-09-15"
