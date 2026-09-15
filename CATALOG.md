@@ -1,6 +1,6 @@
 # Codex Skill 精选目录
 
-核验日期：2026-07-29。结构化事实源为 [`catalog/skills.yaml`](catalog/skills.yaml)；本页为方便阅读的摘要。外部项目会变化，安装前仍应打开上游确认最新版说明。
+核验日期：2026-09-15。结构化事实源为 [`catalog/skills.yaml`](catalog/skills.yaml)；本页为方便阅读的摘要。外部项目会变化，安装前仍应打开上游确认最新版说明。
 
 ## 快速选择
 
@@ -84,6 +84,28 @@ macOS/Linux 将命令替换为：
 | `xlsx` | `openai-spreadsheets` | 许可证限制复制和再分发，Codex 已有官方插件。 |
 
 ## 待核验
+
+2026-09-15 从本机同步了一批许可证明确的归档副本。除原有维护项外，这些镜像暂不进入推荐安装清单；来源和兼容性复核见[本机 Skill 同步清单](docs/local-skill-inventory-2026-09-15.md)。
+
+| 条目 | 许可证 | 当前建议 |
+|---|---|---|
+| `audience-adapter` | MIT | 等待来源核验后再决定是否推荐。 |
+| `cloudflare-deploy` | Apache-2.0 | 优先使用上游当前版本。 |
+| `deep-probe` | MIT | 等待具体上游地址核验。 |
+| `dws` | Apache-2.0 | 需要钉钉 CLI、账号与权限配置。 |
+| `idea-to-prd` | MIT | 等待来源和实践效果复核。 |
+| `jupyter-notebook` | Apache-2.0 | 优先使用上游当前版本。 |
+| `netlify-deploy` | Apache-2.0 | 优先使用上游当前版本。 |
+| `pdf` | Apache-2.0 | 优先使用 Codex 官方插件版本。 |
+| `playwright` | Apache-2.0 | 优先使用上游当前版本。 |
+| `playwright-interactive` | Apache-2.0 | 优先使用上游当前版本。 |
+| `render-deploy` | Apache-2.0 | 优先使用上游当前版本。 |
+| `screenshot` | Apache-2.0 | 优先使用上游当前版本。 |
+| `security-best-practices` | Apache-2.0 | 优先使用上游当前版本。 |
+| `security-ownership-map` | Apache-2.0 | 优先使用上游当前版本。 |
+| `security-threat-model` | Apache-2.0 | 优先使用上游当前版本。 |
+| `vercel-deploy` | MIT | 等待具体上游地址核验。 |
+| `weighted-scoring` | MIT | 等待来源和实践效果复核。 |
 
 | 条目 | 缺口 | 当前建议 |
 |---|---|---|
