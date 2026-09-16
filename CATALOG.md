@@ -65,7 +65,7 @@ macOS/Linux 将命令替换为：
 
 ## 弃用与迁移
 
-仓库安装器会拒绝以下条目。
+以下旧条目的正文已于 2026-09-16 从仓库移除（`git rm skills/<id>`），目录仅保留迁移记录；安装器按外部条目处理，不会安装它们。
 
 | 旧条目 | 替代品 | 原因 |
 |---|---|---|
@@ -82,6 +82,7 @@ macOS/Linux 将命令替换为：
 | `webapp-testing` | `playwright-interactive` | 当前持久会话更适合迭代功能与视觉 QA。 |
 | `writing-plans` | `superpowers` | 新版包含上下文隔离和计划审查。 |
 | `xlsx` | `openai-spreadsheets` | 许可证限制复制和再分发，Codex 已有官方插件。 |
+| `code-review-and-quality` | `superpowers` / `security-best-practices` | 缺少可核验上游、作者和许可证，不适合公开分发。 |
 
 ## 待核验
 
@@ -109,7 +110,6 @@ macOS/Linux 将命令替换为：
 
 | 条目 | 缺口 | 当前建议 |
 |---|---|---|
-| `code-review-and-quality` | 缺少可核验上游、作者和许可证 | 不新装；一般审查用 Superpowers，安全审查用 `security-best-practices`。 |
 | `style-alchemy` | 本机自有，尚未公开，需核验样本和版权边界 | 完成脱敏、许可证和模仿风险审查后再发布。 |
 | `work-reporting` | 本机自有，包含组织与个人数据假设 | 去除个人路径、组织规则和敏感信息后再发布。 |
 

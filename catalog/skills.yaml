@@ -1,1035 +1,978 @@
 schema_version: 1
 skills:
-  - id: brainstorming
-    name: Brainstorming（旧副本）
-    category: agent-workflow
-    distribution: vendored
-    purpose: 在实现前澄清需求并形成设计。
-    upstream: https://github.com/obra/superpowers
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/brainstorming
-    install:
-      repository: 不建议安装；请安装完整 Superpowers 插件。
-    license: MIT（上游）
-    status: deprecated
-    replaced_by: superpowers
-    replacement_reason: 仓库副本落后，且单独安装会丢失插件级工作流和自动更新。
-    dependencies: []
-    risk_notes: 旧流程可能与当前 Codex 工具和插件触发规则不一致。
-    verified_on: "2026-07-14"
-
-  - id: code-review-and-quality
-    name: Code Review and Quality
-    category: code-quality
-    distribution: vendored
-    purpose: 从正确性、可读性、架构、安全和性能维度审查代码。
-    upstream: 未确认
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/code-review-and-quality
-    install:
-      repository: 暂不建议安装；等待来源和许可证核验。
-    license: 未声明
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 缺少可核验的作者、上游和许可证；安全审查范围也不等同于专用安全 Skill。
-    verified_on: "2026-07-14"
-
-  - id: docx
-    name: DOCX（旧副本）
-    category: documents
-    distribution: vendored
-    purpose: 创建、读取和编辑 Word 文档。
-    upstream: https://github.com/anthropics/skills/tree/main/skills/docx
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/docx
-    install:
-      repository: 禁止新装；使用 Codex Documents 插件。
-    license: Anthropic source-available，限制复制与分发
-    status: deprecated
-    replaced_by: openai-documents
-    replacement_reason: 当前许可证不适合由本公开仓库再分发，Codex 已有官方文档插件。
-    dependencies:
-      - Python 文档处理库
-      - LibreOffice（部分渲染流程）
-    risk_notes: 存在明确再分发限制；旧副本需要单独进行许可证与历史清理。
-    verified_on: "2026-07-14"
-
-  - id: drawio-skill
-    name: Draw.io Skill（旧副本 1.5.2）
-    category: diagrams
-    distribution: vendored
-    purpose: 生成 Draw.io 图表并通过桌面 CLI 导出。
-    upstream: https://github.com/Agents365-ai/drawio-skill
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/drawio-skill
-    install:
-      repository: 不建议安装；使用官方上游最新版。
-    license: MIT
-    status: deprecated
-    replaced_by: drawio-skill-upstream
-    replacement_reason: 仓库版 1.5.2 明显落后于上游 1.32.0，且 frontmatter 不符合当前校验器。
-    dependencies:
-      - Draw.io Desktop CLI
-    risk_notes: 导出会启动本机桌面程序；沙箱环境可能无法运行 GUI CLI。
-    verified_on: "2026-07-14"
-
-  - id: hatch-pet
-    name: Hatch Pet
-    category: media-generation
-    distribution: vendored
-    purpose: 创建、校验并打包 Codex 动画宠物图集。
-    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/hatch-pet
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/hatch-pet
-    install:
-      repository: .\scripts\install-skill.ps1 -Name hatch-pet
-    license: 未声明
-    status: maintained
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Codex imagegen Skill
-      - Python 图像处理依赖
-    risk_notes: 会生成和处理大量图像；品牌素材需注意商标、版权和授权边界。
-    verified_on: "2026-07-14"
-
-  - id: mcp-builder
-    name: MCP Builder
-    category: mcp-development
-    distribution: vendored
-    purpose: 设计、实现、测试和评估 MCP Server。
-    upstream: https://github.com/anthropics/skills/tree/main/skills/mcp-builder
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/mcp-builder
-    install:
-      repository: .\scripts\install-skill.ps1 -Name mcp-builder
-    license: Apache-2.0
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Python 或 Node.js MCP SDK
-    risk_notes: MCP 工具可能接触外部系统；需要正确声明只读、破坏性和幂等性边界。
-    verified_on: "2026-07-14"
-
-  - id: planning-with-files
-    name: Planning with Files（旧副本 2.37.0）
-    category: agent-workflow
-    distribution: vendored
-    purpose: 用 task_plan.md、findings.md 和 progress.md 保存复杂任务状态。
-    upstream: https://github.com/OthmanAdi/planning-with-files
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/planning-with-files
-    install:
-      repository: 不建议安装；使用上游最新版。
-    license: MIT（上游）
-    status: deprecated
-    replaced_by: planning-with-files-upstream
-    replacement_reason: 仓库版 2.37.0 已落后于上游 3.5.0，并包含 Codex 不消费的 Claude hooks。
-    dependencies:
-      - Python
-    risk_notes: 计划文件可能混入来自网页的提示注入内容；应保留数据边界和完整性检查。
-    verified_on: "2026-07-14"
-
-  - id: ppt-master
-    name: PPT Master（旧副本）
-    category: presentations
-    distribution: vendored
-    purpose: 将文档和主题转换为可编辑 PPTX，并支持 SVG、图表和动画流程。
-    upstream: https://github.com/hugohe3/ppt-master
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/ppt-master
-    install:
-      repository: 不建议安装；使用上游最新版。
-    license: MIT（上游）
-    status: deprecated
-    replaced_by: ppt-master-upstream
-    replacement_reason: 仓库镜像超过一万文件且已偏离上游 3.1.0，无法可靠跟随高频更新。
-    dependencies:
-      - Python 3.10+
-      - requirements.txt 中的处理依赖
-    risk_notes: 可调用多种图像和语音服务；使用云服务时需保护 API Key 与业务材料。
-    verified_on: "2026-07-14"
-
-  - id: project-memory
-    name: Project Memory
-    category: knowledge-memory
-    distribution: vendored
-    purpose: 在工作区维护精简、可持续更新的项目长期记忆。
-    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/project-memory
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/project-memory
-    install:
-      repository: .\scripts\install-skill.ps1 -Name project-memory
-    license: 未声明
-    status: maintained
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 记忆文件可能包含内部决策或个人偏好，提交前需要检查敏感信息。
-    verified_on: "2026-07-14"
-
-  - id: systematic-debugging
-    name: Systematic Debugging（旧副本）
-    category: code-quality
-    distribution: vendored
-    purpose: 用根因分析而不是试错补丁诊断缺陷。
-    upstream: https://github.com/obra/superpowers
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/systematic-debugging
-    install:
-      repository: 不建议安装；使用完整 Superpowers 插件。
-    license: MIT（上游）
-    status: deprecated
-    replaced_by: superpowers
-    replacement_reason: 当前插件版本包含更新后的方法、示例和 Codex 元数据。
-    dependencies: []
-    risk_notes: 旧副本可能与当前工具映射不一致。
-    verified_on: "2026-07-14"
-
-  - id: test-driven-development
-    name: Test-Driven Development（旧副本）
-    category: code-quality
-    distribution: vendored
-    purpose: 强制红灯、绿灯和重构的测试驱动流程。
-    upstream: https://github.com/obra/superpowers
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/test-driven-development
-    install:
-      repository: 不建议安装；使用完整 Superpowers 插件。
-    license: MIT（上游）
-    status: deprecated
-    replaced_by: superpowers
-    replacement_reason: 完整插件能将 TDD 与设计、计划、评审和完成验证串联起来。
-    dependencies: []
-    risk_notes: 单独安装可能造成工作流断裂或同名冲突。
-    verified_on: "2026-07-14"
-
-  - id: ui-ux-pro-max
-    name: UI/UX Pro Max（旧副本）
-    category: design
-    distribution: vendored
-    purpose: 为 Web 和移动端提供 UI/UX 设计知识与可检索规则。
-    upstream: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/ui-ux-pro-max
-    install:
-      repository: 不建议安装；使用官方 CLI 生成 Codex 版本。
-    license: MIT
-    status: deprecated
-    replaced_by: ui-ux-pro-max-upstream
-    replacement_reason: 官方 2.11.0 已显著扩展数据和技术栈，并要求通过 CLI 生成平台适配版本。
-    dependencies:
-      - Python（搜索脚本）
-    risk_notes: 设计建议需要结合产品语境和可访问性测试，不能当作确定性规范。
-    verified_on: "2026-07-14"
-
-  - id: using-superpowers
-    name: Using Superpowers（旧副本）
-    category: agent-workflow
-    distribution: vendored
-    purpose: 引导 Agent 在响应前发现并使用适用 Skill。
-    upstream: https://github.com/obra/superpowers
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/using-superpowers
-    install:
-      repository: 不建议安装；使用完整 Superpowers 插件。
-    license: MIT（上游）
-    status: deprecated
-    replaced_by: superpowers
-    replacement_reason: Codex 已支持原生插件，单独复制引导 Skill 不再是完整安装方式。
-    dependencies: []
-    risk_notes: 与其他版本并存会造成同名 Skill 触发冲突。
-    verified_on: "2026-07-14"
-
-  - id: verification-before-completion
-    name: Verification Before Completion（旧副本）
-    category: code-quality
-    distribution: vendored
-    purpose: 在声称完成前要求重新运行并读取验证证据。
-    upstream: https://github.com/obra/superpowers
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/verification-before-completion
-    install:
-      repository: 不建议安装；使用完整 Superpowers 插件。
-    license: MIT（上游）
-    status: deprecated
-    replaced_by: superpowers
-    replacement_reason: 当前插件版包含 Codex 元数据并与其他交付工作流协同。
-    dependencies: []
-    risk_notes: 单独旧版会遗漏当前插件的完成分支与评审约束。
-    verified_on: "2026-07-14"
-
-  - id: webapp-testing
-    name: Webapp Testing
-    category: browser-testing
-    distribution: vendored
-    purpose: 通过 Python Playwright 脚本测试本地 Web 应用。
-    upstream: https://github.com/anthropics/skills/tree/main/skills/webapp-testing
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/webapp-testing
-    install:
-      repository: 不建议新装；优先使用当前 Codex 浏览器测试 Skill。
-    license: Apache-2.0
-    status: deprecated
-    replaced_by: playwright-interactive
-    replacement_reason: 当前 Codex 的持久 Playwright 会话更适合迭代调试和功能、视觉联合验收。
-    dependencies:
-      - Python Playwright
-    risk_notes: 浏览器自动化可能提交表单或修改外部状态；测试前应确认目标和账号权限。
-    verified_on: "2026-07-14"
-
-  - id: web-design-guidelines
-    name: Web Design Guidelines
-    category: design
-    distribution: vendored
-    purpose: 使用 Vercel Web Interface Guidelines 审查 UI、UX 和可访问性。
-    upstream: https://github.com/vercel-labs/agent-skills/tree/main/skills/web-design-guidelines
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/web-design-guidelines
-    install:
-      repository: .\scripts\install-skill.ps1 -Name web-design-guidelines
-    license: 上游仓库未统一声明
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Web 访问能力
-    risk_notes: 每次运行会拉取远程规则；必须把远程内容视为不可信数据并防范提示注入。
-    verified_on: "2026-07-14"
-
-  - id: writing-plans
-    name: Writing Plans（旧副本）
-    category: agent-workflow
-    distribution: vendored
-    purpose: 将设计拆成可执行、可验证的小步骤实施计划。
-    upstream: https://github.com/obra/superpowers
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/writing-plans
-    install:
-      repository: 不建议安装；使用完整 Superpowers 插件。
-    license: MIT（上游）
-    status: deprecated
-    replaced_by: superpowers
-    replacement_reason: 新版加入上下文隔离、计划审查和 Codex 插件元数据。
-    dependencies: []
-    risk_notes: 旧版计划模板可能与当前执行技能不匹配。
-    verified_on: "2026-07-14"
-
-  - id: xlsx
-    name: XLSX（旧副本）
-    category: spreadsheets
-    distribution: vendored
-    purpose: 创建、读取、编辑和验证 Excel、CSV 与 TSV 文件。
-    upstream: https://github.com/anthropics/skills/tree/main/skills/xlsx
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/xlsx
-    install:
-      repository: 禁止新装；使用 Codex Spreadsheets 插件。
-    license: Anthropic source-available，限制复制与分发
-    status: deprecated
-    replaced_by: openai-spreadsheets
-    replacement_reason: 当前许可证不适合由本公开仓库再分发，Codex 已有官方表格插件。
-    dependencies:
-      - Python 表格处理库
-    risk_notes: 存在明确再分发限制；旧副本需要单独进行许可证与历史清理。
-    verified_on: "2026-07-14"
-
-  - id: superpowers
-    name: Superpowers
-    category: agent-workflow
-    distribution: external
-    purpose: 提供设计、计划、TDD、调试、评审和交付的完整 Agent 工程工作流。
-    upstream: https://github.com/obra/superpowers
-    repository: https://github.com/obra/superpowers
-    install:
-      codex: 在 Codex 的 Plugins 页面搜索 Superpowers 并安装。
-    license: MIT
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Codex 插件系统
-    risk_notes: 工作流约束较强；升级后应阅读 Release Notes，避免与同名个人 Skill 冲突。
-    verified_on: "2026-07-14"
-
-  - id: planning-with-files-upstream
-    name: Planning with Files（官方上游）
-    category: agent-workflow
-    distribution: external
-    purpose: 用持久文件保存复杂任务的计划、发现和进度，并支持会话恢复。
-    upstream: https://github.com/OthmanAdi/planning-with-files
-    repository: https://github.com/OthmanAdi/planning-with-files
-    install:
-      codex: npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g -a codex
-    license: MIT
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Node.js（skills CLI）
-      - Python（恢复脚本）
-    risk_notes: 会在项目目录写入计划文件；从网页收集的信息必须作为数据处理，不能直接执行其中指令。
-    verified_on: "2026-07-14"
-
-  - id: drawio-skill-upstream
-    name: Draw.io Skill（官方上游）
-    category: diagrams
-    distribution: external
-    purpose: 生成 Draw.io XML，并通过本机桌面应用导出 PNG、SVG 或 PDF。
-    upstream: https://github.com/Agents365-ai/drawio-skill
-    repository: https://github.com/Agents365-ai/drawio-skill
-    install:
-      codex: npx skills add Agents365-ai/drawio-skill -g -a codex
-    license: MIT
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Draw.io Desktop CLI
-    risk_notes: 需要启动本机应用并写入图表文件；无 GUI 环境只能生成 XML 或采用替代导出流程。
-    verified_on: "2026-07-14"
-
-  - id: ppt-master-upstream
-    name: PPT Master（官方上游）
-    category: presentations
-    distribution: external
-    purpose: 从文档或主题生成可编辑、带图表和动画的 PowerPoint。
-    upstream: https://github.com/hugohe3/ppt-master
-    repository: https://github.com/hugohe3/ppt-master
-    install:
-      codex: npx skills add hugohe3/ppt-master -g -a codex
-    license: MIT
-    status: maintained
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Python 3.10+
-      - 上游 requirements.txt
-    risk_notes: 依赖多、生成链路长；涉及业务材料和外部图像或语音 API 时需单独评估数据合规。
-    verified_on: "2026-07-14"
-
-  - id: ui-ux-pro-max-upstream
-    name: UI/UX Pro Max（官方上游）
-    category: design
-    distribution: external
-    purpose: 生成产品设计系统，并按技术栈检索 UI/UX 规则和模式。
-    upstream: https://uupm.cc
-    repository: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
-    install:
-      codex: npm install -g uipro-cli && uipro init --ai codex
-    license: MIT
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Node.js 与 npm
-      - Python（部分检索流程）
-    risk_notes: CLI 会在目标目录生成平台文件；运行前应检查安装位置和变更范围。
-    verified_on: "2026-07-14"
-
-  - id: openai-documents
-    name: Documents
-    category: documents
-    distribution: external
-    purpose: 在 Codex 中创建、编辑、批注和验证 Word 文档。
-    upstream: https://github.com/openai/skills
-    repository: https://github.com/openai/skills
-    install:
-      codex: 在 Codex 的 Plugins 页面安装 Documents。
-    license: 按 OpenAI 插件条目声明
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Codex 插件系统
-    risk_notes: 文档可能包含敏感业务数据；调用外部模型或连接器前应确认数据边界。
-    verified_on: "2026-07-14"
-
-  - id: openai-spreadsheets
-    name: Spreadsheets
-    category: spreadsheets
-    distribution: external
-    purpose: 在 Codex 中创建、编辑、分析和验证 Excel 与兼容表格文件。
-    upstream: https://github.com/openai/skills
-    repository: https://github.com/openai/skills
-    install:
-      codex: 在 Codex 的 Plugins 页面安装 Spreadsheets。
-    license: 按 OpenAI 插件条目声明
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Codex 插件系统
-    risk_notes: 公式、外部链接和宏可能带来执行或数据外泄风险，交付前需要重新计算与检查。
-    verified_on: "2026-07-14"
-
-  - id: scouting-ai-ecosystem
-    name: Scouting AI Ecosystem
-    category: research
-    distribution: vendored
-    purpose: 定期发现、比较和跟踪 Agent、Skill、MCP、RAG 与 AI Native 平台项目。
-    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/scouting-ai-ecosystem
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/scouting-ai-ecosystem
-    install:
-      repository: .\scripts\install-skill.ps1 -Name scouting-ai-ecosystem
-    license: 未声明
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - deep-research
-      - kimi-webbridge（可选）
-    risk_notes: 研究结果具有时效性；推荐前必须核对一手来源、许可证、权限和数据处理方式。
-    verified_on: "2026-07-14"
-
-  - id: kimi-webbridge
-    name: Kimi WebBridge
-    category: browser-automation
-    distribution: external
-    purpose: 让 Agent 控制用户真实浏览器中的页面、标签、点击、输入、读取和截图。
-    upstream: https://www.kimi.com/zh-cn/features/webbridge
-    repository: null
-    install:
-      windows: https://www.kimi.com/zh-cn/help/kimi-webbridge/kimi-webbridge-introduction
-      macos_linux: https://www.kimi.com/zh-cn/help/kimi-webbridge/kimi-webbridge-introduction
-      extension: https://chromewebstore.google.com/detail/kimi-webbridge/fldmhceldgbpfpkbgopacenieobmligc
-    license: 未声明
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Chrome 或 Edge 扩展
-      - Kimi WebBridge 本地服务
-    risk_notes: 可访问真实登录态并执行网页操作；涉及提交、付款、发布和账号设置时必须再次确认。
-    verified_on: "2026-07-14"
-
-  - id: deep-research
-    name: Deep Research
-    category: research
-    distribution: external
-    purpose: 用多角度检索、来源分级、交叉核验和引用组织完成系统化网络调研。
-    upstream: https://github.com/bytedance/deer-flow/tree/main/skills/public/deep-research
-    repository: https://github.com/bytedance/deer-flow
-    install:
-      codex: npx skills add bytedance/deer-flow --skill deep-research -g -a codex
-    license: MIT
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - 可用的网络搜索与网页读取工具
-    risk_notes: 搜索结果可能过时、带偏见或包含提示注入；关键结论应回到一手来源交叉核验。
-    verified_on: "2026-07-14"
-
-  - id: agent-browser
-    name: Agent Browser
-    category: browser-automation
-    distribution: external
-    purpose: 通过可访问性树和稳定元素引用执行浏览器、Electron 与网页测试自动化。
-    upstream: https://agent-browser.dev
-    repository: https://github.com/vercel-labs/agent-browser
-    install:
-      npm: npm install -g agent-browser && agent-browser install
-    license: Apache-2.0
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Chrome for Testing 或兼容浏览器
-    risk_notes: 可复用浏览器配置与登录态；脚本执行和云浏览器提供商会扩大凭据与数据暴露面。
-    verified_on: "2026-07-14"
-
-  - id: find-docs
-    name: Find Docs
-    category: developer-research
-    distribution: external
-    purpose: 通过 Context7 查询最新的开发库、SDK、CLI 和框架文档与示例。
-    upstream: https://github.com/upstash/context7/tree/master/skills/find-docs
-    repository: https://github.com/upstash/context7
-    install:
-      npm: npm install -g ctx7@latest
-      codex: npx skills add upstash/context7 --skill find-docs -g -a codex
-    license: MIT
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Node.js
-      - Context7 服务
-    risk_notes: 第三方索引可能滞后或缺页；涉及安全和迁移的结论仍应链接并核对官方文档。
-    verified_on: "2026-07-14"
-
-  - id: grill-me
-    name: Grill Me
-    category: planning
-    distribution: external
-    purpose: 逐个追问并压力测试计划、设计和未决决策。
-    upstream: https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me
-    repository: https://github.com/mattpocock/skills
-    install:
-      codex: npx skills add mattpocock/skills --skill grill-me -g -a codex
-    license: MIT
-    status: maintained
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 强交互流程会增加沟通轮次；不适合用户已经给出完整且已批准规格的机械任务。
-    verified_on: "2026-07-14"
-
-  - id: improve-codebase-architecture
-    name: Improve Codebase Architecture
-    category: architecture
-    distribution: external
-    purpose: 扫描代码库中的浅模块和摩擦点，生成可视报告并推进架构深化。
-    upstream: https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture
-    repository: https://github.com/mattpocock/skills
-    install:
-      codex: npx skills add mattpocock/skills --skill improve-codebase-architecture -g -a codex
-    license: MIT
-    status: maintained
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - codebase-design
-      - domain-modeling（建议）
-    risk_notes: 架构建议需要结合领域约束和 ADR；扫描结果不等于授权大规模重构。
-    verified_on: "2026-07-14"
-
-  - id: style-alchemy
-    name: Style Alchemy
-    category: writing
-    distribution: external
-    purpose: 分析文章风格并生成可复用的风格档案和写作 Skill。
-    upstream: 本机自有，尚未公开
-    repository: null
-    install:
-      repository: 暂不提供；等待来源、许可证和样本合规审查。
-    license: 未声明
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - 多篇合法取得的文章样本
-    risk_notes: 模仿在世作者或受保护作品可能引发版权、署名和误导风险，应侧重抽象特征而非复制表达。
-    verified_on: "2026-07-14"
-
-  - id: work-reporting
-    name: Work Reporting
-    category: reporting
-    distribution: external
-    purpose: 从本地证据生成可审计的中文日报、周报、月报和真实活动日志。
-    upstream: 本机自有，尚未公开
-    repository: null
-    install:
-      repository: 暂不提供；需要先去除个人路径、组织规则和敏感数据假设。
-    license: 未声明
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - 工作区内的真实活动证据
-    risk_notes: 可能处理聊天、娱乐、测试和内部工作记录；公开分享前必须去标识化并区分内部、外部版本。
-    verified_on: "2026-07-14"
-
-  - id: security-best-practices
-    name: Security Best Practices
-    category: security
-    distribution: vendored
-    purpose: 对 Python、JavaScript/TypeScript 和 Go 项目执行语言与框架专项安全审查。
-    upstream: https://github.com/openai/skills/tree/main/skills/.curated/security-best-practices
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/security-best-practices
-    install:
-      repository: 暂不建议从本仓库安装；本目录是本机许可核验后的归档副本。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 归档副本不会自动跟随上游更新；只覆盖部分语言和框架，不能代替威胁建模、依赖扫描、渗透测试和人工安全评审。
-    verified_on: "2026-09-15"
-
-  - id: playwright-interactive
-    name: Playwright Interactive
-    category: browser-testing
-    distribution: vendored
-    purpose: 在持久 Playwright 会话中迭代调试 Web 或 Electron 应用并完成视觉验收。
-    upstream: https://github.com/openai/skills/tree/main/skills/.curated/playwright-interactive
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/playwright-interactive
-    install:
-      repository: 暂不建议从本仓库安装；本目录是本机许可核验后的归档副本。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - js_repl
-      - Playwright
-      - Chromium（网页测试）
-    risk_notes: 归档副本不会自动跟随上游更新；当前流程可能要求降低沙箱限制，只应在可信项目和隔离环境中启用。
-    verified_on: "2026-09-15"
-
-  - id: markdown-writer
-    name: Markdown Writer
-    category: writing
-    distribution: external
-    purpose: 生成结构清晰的 README、API 文档、操作指南、变更日志和技术 Wiki。
-    upstream: https://github.com/TerminalSkills/skills/tree/main/skills/markdown-writer
-    repository: https://github.com/TerminalSkills/skills
-    install:
-      codex: npx skills add TerminalSkills/skills --skill markdown-writer -g -a codex
-    license: Apache-2.0
-    status: maintained
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 示例中的命令和 URL 是模板内容，不能在未核对项目上下文时直接执行或发布。
-    verified_on: "2026-07-14"
-
-  - id: task-package-delivery
-    name: Task Package Delivery
-    category: delivery-governance
-    distribution: vendored
-    purpose: 把带范围和验收标准的任务包作为交付合同，完成实施、逐项验证、差异审查和有界收敛。
-    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/task-package-delivery
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/task-package-delivery
-    install:
-      repository: .\scripts\install-skill.ps1 -Name task-package-delivery
-    license: 未声明（本仓库原创）
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 任务包扩大验证深度但不扩大提交、推送、发布或破坏性操作权限；必须保留用户已有改动。
-    verified_on: "2026-07-29"
-
-  - id: neat-freak
-    name: Neat Freak
-    category: knowledge-governance
-    distribution: external
-    purpose: 在开发或发布收尾时对齐代码、运行态、文档、规则、获准维护的记忆和工作区残留。
-    upstream: https://github.com/KKKKhazix/khazix-skills/tree/main/neat-freak
-    repository: https://github.com/KKKKhazix/khazix-skills
-    install:
-      repository: npx skills add KKKKhazix/khazix-skills --skill neat-freak -g -a codex
-    license: MIT（上游）
-    status: maintained
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Git 和 rg（建议）
-      - Bash（可选，只用于 audit-inventory.sh）
-    risk_notes: 可发现删除和清场候选，但未获得用户看过完整汇报后的明确确认前不得执行破坏性清理。
-    verified_on: "2026-07-29"
-
-  - id: research-governance
-    name: Research Governance
-    category: research
-    distribution: vendored
-    purpose: 把会影响 WBS、路线图、架构或供应商决策的调研转成可审计证据、Gate、停止条件和独立复审记录。
-    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/research-governance
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/research-governance
-    install:
-      repository: .\scripts\install-skill.ps1 -Name research-governance
-    license: 未声明（本仓库原创）
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - deep-research（外部调研时）
-      - kimi-webbridge（真实浏览器场景）
-    risk_notes: 调研通过不等于技术选型、实施、采购或生产授权；动态事实必须记录快照和失效条件。
-    verified_on: "2026-07-29"
-
-  - id: coordinate-review-repair-loops
-    name: Coordinate Review and Repair Loops
-    category: project-control
-    distribution: vendored
-    purpose: 复用既有实施和独立审查任务，通过事件驱动等待协调修复、delta 复审、集成和控制面收口。
-    upstream: https://github.com/T3L000/codex-skills/tree/main/skills/coordinate-review-repair-loops
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/coordinate-review-repair-loops
-    install:
-      repository: .\scripts\install-skill.ps1 -Name coordinate-review-repair-loops
-    license: 未声明（本仓库原创）
-    status: maintained
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - task-package-delivery
-      - open-code-review-delegate（Git 独立审查且项目规则要求时）
-      - Codex 任务协调工具
-    risk_notes: 只适用于用户明确授权的多任务持续协调；不得从“盯着直到完成”推导提交、推送、合并、文档改写或清理权限。
-    verified_on: "2026-07-29"
-
-  - id: open-code-review-delegate
-    name: Open Code Review Delegation Mode
-    category: code-review
-    distribution: external
-    purpose: 让 OCR 只负责确定性的文件筛选和规则解析，由宿主 Agent 使用自身模型完成独立代码审查。
-    upstream: https://github.com/alibaba/open-code-review
-    repository: https://github.com/alibaba/open-code-review
-    install:
-      npm: npm install -g @alibaba-group/open-code-review
-      codex: 按上游 Delegation Mode 文档安装 Skill；不要复制本仓库外的陈旧副本。
-    license: Apache-2.0
-    status: recommended
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - OCR CLI 1.7.11 或更高版本
-      - Git
-    risk_notes: preview/rule 只提供确定性审查范围和规则，不替代宿主 Agent 的业务合同复核、反例验证和独立结论。
-    verified_on: "2026-07-29"
-
-  - id: audience-adapter
-    name: Audience Adapter
-    category: communication
-    distribution: vendored
-    purpose: 根据管理层、技术团队或运营受众调整汇报材料的粒度、语言和侧重点。
-    upstream: 本机安装副本，来源待核验
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/audience-adapter
-    install:
-      repository: 暂不建议安装；等待来源与兼容性复核。
-    license: MIT
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 只能调整表达方式，不能替代事实核验、审批或利益相关方确认。
-    verified_on: "2026-09-15"
-
-  - id: cloudflare-deploy
-    name: Cloudflare Deploy
-    category: deployment
-    distribution: vendored
-    purpose: 将应用和基础设施部署到 Cloudflare Workers、Pages 等服务。
-    upstream: https://github.com/openai/skills
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/cloudflare-deploy
-    install:
-      repository: 暂不建议安装；优先使用上游当前版本。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Cloudflare 账号与 CLI
-    risk_notes: 部署会改变外部服务状态；示例凭据均须替换为用户自己的安全配置。
-    verified_on: "2026-09-15"
-
-  - id: deep-probe
-    name: Deep Probe
-    category: product-thinking
-    distribution: vendored
-    purpose: 通过逐分支追问压力测试方案、设计与关键假设。
-    upstream: 本机安装副本，作者标记为 Matt Pocock，具体仓库待核验
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/deep-probe
-    install:
-      repository: 暂不建议安装；等待上游来源复核。
-    license: MIT
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 连环追问用于暴露未知项，不等于已经取得用户决策或实施授权。
-    verified_on: "2026-09-15"
-
-  - id: dws
-    name: DingTalk Workspace CLI
-    category: productivity
-    distribution: vendored
-    purpose: 管理钉钉文档、云盘、表格、日历、通讯录、消息、审批等工作空间能力。
-    upstream: DingTalk Workspace CLI，具体公开仓库待核验
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/dws
-    install:
-      repository: 暂不建议安装；需要钉钉账号、CLI 与权限配置。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - DingTalk Workspace CLI
-      - 钉钉账号与相应权限
-    risk_notes: 可接触组织通讯录、消息、文档和审批数据；写操作必须确认目标和权限。
-    verified_on: "2026-09-15"
-
-  - id: idea-to-prd
-    name: Idea to PRD
-    category: product-management
-    distribution: vendored
-    purpose: 将一句话需求扩展为用户故事、功能清单、优先级和验收标准。
-    upstream: 本机安装副本，来源待核验
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/idea-to-prd
-    install:
-      repository: 暂不建议安装；等待来源与实践效果复核。
-    license: MIT
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 自动生成的 PRD 仍需业务负责人确认范围、约束和成功指标。
-    verified_on: "2026-09-15"
-
-  - id: jupyter-notebook
-    name: Jupyter Notebook
-    category: developer-tools
-    distribution: vendored
-    purpose: 创建和编辑用于实验、探索与教程的 Jupyter Notebook。
-    upstream: https://github.com/openai/skills
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/jupyter-notebook
-    install:
-      repository: 暂不建议安装；优先使用上游当前版本。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Python
-      - Jupyter
-    risk_notes: Notebook 可能包含大体积输出、执行副作用或敏感数据，提交前应清理。
-    verified_on: "2026-09-15"
-
-  - id: netlify-deploy
-    name: Netlify Deploy
-    category: deployment
-    distribution: vendored
-    purpose: 使用 Netlify CLI 部署、托管或关联 Web 项目。
-    upstream: https://github.com/openai/skills
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/netlify-deploy
-    install:
-      repository: 暂不建议安装；优先使用上游当前版本。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Netlify CLI 与账号
-    risk_notes: 生产部署和域名变更会影响外部用户，执行前需要确认环境与目标站点。
-    verified_on: "2026-09-15"
-
-  - id: pdf
-    name: PDF
-    category: documents
-    distribution: vendored
-    purpose: 读取、创建、渲染并校验版式敏感的 PDF 文件。
-    upstream: https://github.com/openai/skills
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/pdf
-    install:
-      repository: 暂不建议安装；优先使用 Codex 官方插件版本。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Python PDF 工具
-      - Poppler（渲染时）
-    risk_notes: 处理简历、合同等 PDF 时应避免把个人或业务敏感信息提交到公开仓库。
-    verified_on: "2026-09-15"
-
-  - id: playwright
-    name: Playwright
-    category: browser-testing
-    distribution: vendored
-    purpose: 通过 Playwright CLI 自动化网页导航、表单、截图和 UI 流程验证。
-    upstream: https://github.com/openai/skills
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/playwright
-    install:
-      repository: 暂不建议安装；优先使用上游当前版本。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Playwright
-      - 浏览器运行时
-    risk_notes: 浏览器会接触登录态和外部页面；提交、付款、发布等高影响操作需要单独确认。
-    verified_on: "2026-09-15"
-
-  - id: render-deploy
-    name: Render Deploy
-    category: deployment
-    distribution: vendored
-    purpose: 分析项目、生成 Render Blueprint 并辅助部署到 Render。
-    upstream: https://github.com/openai/skills
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/render-deploy
-    install:
-      repository: 暂不建议安装；优先使用上游当前版本。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Render 账号
-    risk_notes: Blueprint 和部署配置可能产生费用或暴露环境变量，发布前需要人工复核。
-    verified_on: "2026-09-15"
-
-  - id: screenshot
-    name: Screenshot
-    category: computer-use
-    distribution: vendored
-    purpose: 在工具内截图能力不可用时捕获桌面、窗口或指定区域。
-    upstream: https://github.com/openai/skills
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/screenshot
-    install:
-      repository: 暂不建议安装；优先使用上游当前版本。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 截图可能捕获账号、通知和个人信息，分享或提交前必须检查画面内容。
-    verified_on: "2026-09-15"
-
-  - id: security-ownership-map
-    name: Security Ownership Map
-    category: security
-    distribution: vendored
-    purpose: 基于 Git 历史分析敏感代码所有权、关键人员和 bus factor。
-    upstream: https://github.com/openai/skills
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/security-ownership-map
-    install:
-      repository: 暂不建议安装；优先使用上游当前版本。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Git
-      - Python
-    risk_notes: 输出可能暴露人员关系和敏感模块归属，应限制传播范围并结合组织语境解释。
-    verified_on: "2026-09-15"
-
-  - id: security-threat-model
-    name: Security Threat Model
-    category: security
-    distribution: vendored
-    purpose: 基于仓库架构识别资产、信任边界、攻击路径和缓解措施。
-    upstream: https://github.com/openai/skills
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/security-threat-model
-    install:
-      repository: 暂不建议安装；优先使用上游当前版本。
-    license: Apache-2.0
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 威胁模型依赖当前架构和攻击面，不等同于渗透测试或安全认证。
-    verified_on: "2026-09-15"
-
-  - id: vercel-deploy
-    name: Vercel Deploy
-    category: deployment
-    distribution: vendored
-    purpose: 将应用部署到 Vercel 并返回预览或生产访问地址。
-    upstream: 本机安装副本，具体上游待核验
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/vercel-deploy
-    install:
-      repository: 暂不建议安装；等待上游来源和当前安装方式复核。
-    license: MIT
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies:
-      - Vercel 账号与 CLI
-    risk_notes: 部署可能影响公开站点、域名和费用；必须确认目标环境及授权范围。
-    verified_on: "2026-09-15"
-
-  - id: weighted-scoring
-    name: Weighted Scoring
-    category: decision-making
-    distribution: vendored
-    purpose: 用加权评分矩阵和敏感性分析比较技术、供应商与方案。
-    upstream: 本机安装副本，来源待核验
-    repository: https://github.com/T3L000/codex-skills/tree/main/skills/weighted-scoring
-    install:
-      repository: 暂不建议安装；等待来源与实践效果复核。
-    license: MIT
-    status: unverified
-    replaced_by: null
-    replacement_reason: null
-    dependencies: []
-    risk_notes: 分值不能代替证据质量；权重和评分假设需要由决策者确认并做敏感性分析。
-    verified_on: "2026-09-15"
+- id: brainstorming
+  name: Brainstorming（旧副本）
+  category: agent-workflow
+  distribution: external
+  purpose: 在实现前澄清需求并形成设计。
+  upstream: https://github.com/obra/superpowers
+  repository: https://github.com/obra/superpowers
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: MIT（上游）
+  status: deprecated
+  replaced_by: superpowers
+  replacement_reason: 仓库副本落后，且单独安装会丢失插件级工作流和自动更新。
+  dependencies: []
+  risk_notes: 旧流程可能与当前 Codex 工具和插件触发规则不一致。
+  verified_on: '2026-09-16'
+- id: code-review-and-quality
+  name: Code Review and Quality
+  category: code-quality
+  distribution: external
+  purpose: 从正确性、可读性、架构、安全和性能维度审查代码。
+  upstream: 未确认
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: 未声明
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 缺少可核验的作者、上游和许可证；安全审查范围也不等同于专用安全 Skill。
+  verified_on: '2026-09-16'
+- id: docx
+  name: DOCX（旧副本）
+  category: documents
+  distribution: external
+  purpose: 创建、读取和编辑 Word 文档。
+  upstream: https://github.com/anthropics/skills/tree/main/skills/docx
+  repository: https://github.com/anthropics/skills
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: Anthropic source-available，限制复制与分发
+  status: deprecated
+  replaced_by: openai-documents
+  replacement_reason: 当前许可证不适合由本公开仓库再分发，Codex 已有官方文档插件。
+  dependencies:
+  - Python 文档处理库
+  - LibreOffice（部分渲染流程）
+  risk_notes: 存在明确再分发限制；旧副本需要单独进行许可证与历史清理。
+  verified_on: '2026-09-16'
+- id: drawio-skill
+  name: Draw.io Skill（旧副本 1.5.2）
+  category: diagrams
+  distribution: external
+  purpose: 生成 Draw.io 图表并通过桌面 CLI 导出。
+  upstream: https://github.com/Agents365-ai/drawio-skill
+  repository: https://github.com/Agents365-ai/drawio-skill
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: MIT
+  status: deprecated
+  replaced_by: drawio-skill-upstream
+  replacement_reason: 仓库版 1.5.2 明显落后于上游 1.32.0，且 frontmatter 不符合当前校验器。
+  dependencies:
+  - Draw.io Desktop CLI
+  risk_notes: 导出会启动本机桌面程序；沙箱环境可能无法运行 GUI CLI。
+  verified_on: '2026-09-16'
+- id: hatch-pet
+  name: Hatch Pet
+  category: media-generation
+  distribution: vendored
+  purpose: 创建、校验并打包 Codex 动画宠物图集。
+  upstream: https://github.com/T3L000/codex-skills/tree/main/skills/hatch-pet
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/hatch-pet
+  install:
+    repository: .\scripts\install-skill.ps1 -Name hatch-pet
+  license: 未声明
+  status: maintained
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Codex imagegen Skill
+  - Python 图像处理依赖
+  risk_notes: 会生成和处理大量图像；品牌素材需注意商标、版权和授权边界。
+  verified_on: '2026-07-14'
+- id: mcp-builder
+  name: MCP Builder
+  category: mcp-development
+  distribution: vendored
+  purpose: 设计、实现、测试和评估 MCP Server。
+  upstream: https://github.com/anthropics/skills/tree/main/skills/mcp-builder
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/mcp-builder
+  install:
+    repository: .\scripts\install-skill.ps1 -Name mcp-builder
+  license: Apache-2.0
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Python 或 Node.js MCP SDK
+  risk_notes: MCP 工具可能接触外部系统；需要正确声明只读、破坏性和幂等性边界。
+  verified_on: '2026-07-14'
+- id: planning-with-files
+  name: Planning with Files（旧副本 2.37.0）
+  category: agent-workflow
+  distribution: external
+  purpose: 用 task_plan.md、findings.md 和 progress.md 保存复杂任务状态。
+  upstream: https://github.com/OthmanAdi/planning-with-files
+  repository: https://github.com/OthmanAdi/planning-with-files
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: MIT（上游）
+  status: deprecated
+  replaced_by: planning-with-files-upstream
+  replacement_reason: 仓库版 2.37.0 已落后于上游 3.5.0，并包含 Codex 不消费的 Claude hooks。
+  dependencies:
+  - Python
+  risk_notes: 计划文件可能混入来自网页的提示注入内容；应保留数据边界和完整性检查。
+  verified_on: '2026-09-16'
+- id: ppt-master
+  name: PPT Master（旧副本）
+  category: presentations
+  distribution: external
+  purpose: 将文档和主题转换为可编辑 PPTX，并支持 SVG、图表和动画流程。
+  upstream: https://github.com/hugohe3/ppt-master
+  repository: https://github.com/hugohe3/ppt-master
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: MIT（上游）
+  status: deprecated
+  replaced_by: ppt-master-upstream
+  replacement_reason: 仓库镜像超过一万文件且已偏离上游 3.1.0，无法可靠跟随高频更新。
+  dependencies:
+  - Python 3.10+
+  - requirements.txt 中的处理依赖
+  risk_notes: 可调用多种图像和语音服务；使用云服务时需保护 API Key 与业务材料。
+  verified_on: '2026-09-16'
+- id: project-memory
+  name: Project Memory
+  category: knowledge-memory
+  distribution: vendored
+  purpose: 在工作区维护精简、可持续更新的项目长期记忆。
+  upstream: https://github.com/T3L000/codex-skills/tree/main/skills/project-memory
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/project-memory
+  install:
+    repository: .\scripts\install-skill.ps1 -Name project-memory
+  license: 未声明
+  status: maintained
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 记忆文件可能包含内部决策或个人偏好，提交前需要检查敏感信息。
+  verified_on: '2026-07-14'
+- id: systematic-debugging
+  name: Systematic Debugging（旧副本）
+  category: code-quality
+  distribution: external
+  purpose: 用根因分析而不是试错补丁诊断缺陷。
+  upstream: https://github.com/obra/superpowers
+  repository: https://github.com/obra/superpowers
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: MIT（上游）
+  status: deprecated
+  replaced_by: superpowers
+  replacement_reason: 当前插件版本包含更新后的方法、示例和 Codex 元数据。
+  dependencies: []
+  risk_notes: 旧副本可能与当前工具映射不一致。
+  verified_on: '2026-09-16'
+- id: test-driven-development
+  name: Test-Driven Development（旧副本）
+  category: code-quality
+  distribution: external
+  purpose: 强制红灯、绿灯和重构的测试驱动流程。
+  upstream: https://github.com/obra/superpowers
+  repository: https://github.com/obra/superpowers
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: MIT（上游）
+  status: deprecated
+  replaced_by: superpowers
+  replacement_reason: 完整插件能将 TDD 与设计、计划、评审和完成验证串联起来。
+  dependencies: []
+  risk_notes: 单独安装可能造成工作流断裂或同名冲突。
+  verified_on: '2026-09-16'
+- id: ui-ux-pro-max
+  name: UI/UX Pro Max（旧副本）
+  category: design
+  distribution: external
+  purpose: 为 Web 和移动端提供 UI/UX 设计知识与可检索规则。
+  upstream: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+  repository: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: MIT
+  status: deprecated
+  replaced_by: ui-ux-pro-max-upstream
+  replacement_reason: 官方 2.11.0 已显著扩展数据和技术栈，并要求通过 CLI 生成平台适配版本。
+  dependencies:
+  - Python（搜索脚本）
+  risk_notes: 设计建议需要结合产品语境和可访问性测试，不能当作确定性规范。
+  verified_on: '2026-09-16'
+- id: using-superpowers
+  name: Using Superpowers（旧副本）
+  category: agent-workflow
+  distribution: external
+  purpose: 引导 Agent 在响应前发现并使用适用 Skill。
+  upstream: https://github.com/obra/superpowers
+  repository: https://github.com/obra/superpowers
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: MIT（上游）
+  status: deprecated
+  replaced_by: superpowers
+  replacement_reason: Codex 已支持原生插件，单独复制引导 Skill 不再是完整安装方式。
+  dependencies: []
+  risk_notes: 与其他版本并存会造成同名 Skill 触发冲突。
+  verified_on: '2026-09-16'
+- id: verification-before-completion
+  name: Verification Before Completion（旧副本）
+  category: code-quality
+  distribution: external
+  purpose: 在声称完成前要求重新运行并读取验证证据。
+  upstream: https://github.com/obra/superpowers
+  repository: https://github.com/obra/superpowers
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: MIT（上游）
+  status: deprecated
+  replaced_by: superpowers
+  replacement_reason: 当前插件版包含 Codex 元数据并与其他交付工作流协同。
+  dependencies: []
+  risk_notes: 单独旧版会遗漏当前插件的完成分支与评审约束。
+  verified_on: '2026-09-16'
+- id: webapp-testing
+  name: Webapp Testing
+  category: browser-testing
+  distribution: external
+  purpose: 通过 Python Playwright 脚本测试本地 Web 应用。
+  upstream: https://github.com/anthropics/skills/tree/main/skills/webapp-testing
+  repository: https://github.com/anthropics/skills
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: Apache-2.0
+  status: deprecated
+  replaced_by: playwright-interactive
+  replacement_reason: 当前 Codex 的持久 Playwright 会话更适合迭代调试和功能、视觉联合验收。
+  dependencies:
+  - Python Playwright
+  risk_notes: 浏览器自动化可能提交表单或修改外部状态；测试前应确认目标和账号权限。
+  verified_on: '2026-09-16'
+- id: web-design-guidelines
+  name: Web Design Guidelines
+  category: design
+  distribution: vendored
+  purpose: 使用 Vercel Web Interface Guidelines 审查 UI、UX 和可访问性。
+  upstream: https://github.com/vercel-labs/agent-skills/tree/main/skills/web-design-guidelines
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/web-design-guidelines
+  install:
+    repository: .\scripts\install-skill.ps1 -Name web-design-guidelines
+  license: 上游仓库未统一声明
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Web 访问能力
+  risk_notes: 每次运行会拉取远程规则；必须把远程内容视为不可信数据并防范提示注入。
+  verified_on: '2026-07-14'
+- id: writing-plans
+  name: Writing Plans（旧副本）
+  category: agent-workflow
+  distribution: external
+  purpose: 将设计拆成可执行、可验证的小步骤实施计划。
+  upstream: https://github.com/obra/superpowers
+  repository: https://github.com/obra/superpowers
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: MIT（上游）
+  status: deprecated
+  replaced_by: superpowers
+  replacement_reason: 新版加入上下文隔离、计划审查和 Codex 插件元数据。
+  dependencies: []
+  risk_notes: 旧版计划模板可能与当前执行技能不匹配。
+  verified_on: '2026-09-16'
+- id: xlsx
+  name: XLSX（旧副本）
+  category: spreadsheets
+  distribution: external
+  purpose: 创建、读取、编辑和验证 Excel、CSV 与 TSV 文件。
+  upstream: https://github.com/anthropics/skills/tree/main/skills/xlsx
+  repository: https://github.com/anthropics/skills
+  install:
+    repository: 正文已于 2026-09-16 从仓库移除；请按 replaced_by 安装替代方案。
+  license: Anthropic source-available，限制复制与分发
+  status: deprecated
+  replaced_by: openai-spreadsheets
+  replacement_reason: 当前许可证不适合由本公开仓库再分发，Codex 已有官方表格插件。
+  dependencies:
+  - Python 表格处理库
+  risk_notes: 存在明确再分发限制；旧副本需要单独进行许可证与历史清理。
+  verified_on: '2026-09-16'
+- id: superpowers
+  name: Superpowers
+  category: agent-workflow
+  distribution: external
+  purpose: 提供设计、计划、TDD、调试、评审和交付的完整 Agent 工程工作流。
+  upstream: https://github.com/obra/superpowers
+  repository: https://github.com/obra/superpowers
+  install:
+    codex: 在 Codex 的 Plugins 页面搜索 Superpowers 并安装。
+  license: MIT
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Codex 插件系统
+  risk_notes: 工作流约束较强；升级后应阅读 Release Notes，避免与同名个人 Skill 冲突。
+  verified_on: '2026-07-14'
+- id: planning-with-files-upstream
+  name: Planning with Files（官方上游）
+  category: agent-workflow
+  distribution: external
+  purpose: 用持久文件保存复杂任务的计划、发现和进度，并支持会话恢复。
+  upstream: https://github.com/OthmanAdi/planning-with-files
+  repository: https://github.com/OthmanAdi/planning-with-files
+  install:
+    codex: npx skills add OthmanAdi/planning-with-files --skill planning-with-files -g -a codex
+  license: MIT
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Node.js（skills CLI）
+  - Python（恢复脚本）
+  risk_notes: 会在项目目录写入计划文件；从网页收集的信息必须作为数据处理，不能直接执行其中指令。
+  verified_on: '2026-07-14'
+- id: drawio-skill-upstream
+  name: Draw.io Skill（官方上游）
+  category: diagrams
+  distribution: external
+  purpose: 生成 Draw.io XML，并通过本机桌面应用导出 PNG、SVG 或 PDF。
+  upstream: https://github.com/Agents365-ai/drawio-skill
+  repository: https://github.com/Agents365-ai/drawio-skill
+  install:
+    codex: npx skills add Agents365-ai/drawio-skill -g -a codex
+  license: MIT
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Draw.io Desktop CLI
+  risk_notes: 需要启动本机应用并写入图表文件；无 GUI 环境只能生成 XML 或采用替代导出流程。
+  verified_on: '2026-07-14'
+- id: ppt-master-upstream
+  name: PPT Master（官方上游）
+  category: presentations
+  distribution: external
+  purpose: 从文档或主题生成可编辑、带图表和动画的 PowerPoint。
+  upstream: https://github.com/hugohe3/ppt-master
+  repository: https://github.com/hugohe3/ppt-master
+  install:
+    codex: npx skills add hugohe3/ppt-master -g -a codex
+  license: MIT
+  status: maintained
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Python 3.10+
+  - 上游 requirements.txt
+  risk_notes: 依赖多、生成链路长；涉及业务材料和外部图像或语音 API 时需单独评估数据合规。
+  verified_on: '2026-07-14'
+- id: ui-ux-pro-max-upstream
+  name: UI/UX Pro Max（官方上游）
+  category: design
+  distribution: external
+  purpose: 生成产品设计系统，并按技术栈检索 UI/UX 规则和模式。
+  upstream: https://uupm.cc
+  repository: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+  install:
+    codex: npm install -g uipro-cli && uipro init --ai codex
+  license: MIT
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Node.js 与 npm
+  - Python（部分检索流程）
+  risk_notes: CLI 会在目标目录生成平台文件；运行前应检查安装位置和变更范围。
+  verified_on: '2026-07-14'
+- id: openai-documents
+  name: Documents
+  category: documents
+  distribution: external
+  purpose: 在 Codex 中创建、编辑、批注和验证 Word 文档。
+  upstream: https://github.com/openai/skills
+  repository: https://github.com/openai/skills
+  install:
+    codex: 在 Codex 的 Plugins 页面安装 Documents。
+  license: 按 OpenAI 插件条目声明
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Codex 插件系统
+  risk_notes: 文档可能包含敏感业务数据；调用外部模型或连接器前应确认数据边界。
+  verified_on: '2026-07-14'
+- id: openai-spreadsheets
+  name: Spreadsheets
+  category: spreadsheets
+  distribution: external
+  purpose: 在 Codex 中创建、编辑、分析和验证 Excel 与兼容表格文件。
+  upstream: https://github.com/openai/skills
+  repository: https://github.com/openai/skills
+  install:
+    codex: 在 Codex 的 Plugins 页面安装 Spreadsheets。
+  license: 按 OpenAI 插件条目声明
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Codex 插件系统
+  risk_notes: 公式、外部链接和宏可能带来执行或数据外泄风险，交付前需要重新计算与检查。
+  verified_on: '2026-07-14'
+- id: scouting-ai-ecosystem
+  name: Scouting AI Ecosystem
+  category: research
+  distribution: vendored
+  purpose: 定期发现、比较和跟踪 Agent、Skill、MCP、RAG 与 AI Native 平台项目。
+  upstream: https://github.com/T3L000/codex-skills/tree/main/skills/scouting-ai-ecosystem
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/scouting-ai-ecosystem
+  install:
+    repository: .\scripts\install-skill.ps1 -Name scouting-ai-ecosystem
+  license: 未声明
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - deep-research
+  - kimi-webbridge（可选）
+  risk_notes: 研究结果具有时效性；推荐前必须核对一手来源、许可证、权限和数据处理方式。
+  verified_on: '2026-07-14'
+- id: kimi-webbridge
+  name: Kimi WebBridge
+  category: browser-automation
+  distribution: external
+  purpose: 让 Agent 控制用户真实浏览器中的页面、标签、点击、输入、读取和截图。
+  upstream: https://www.kimi.com/zh-cn/features/webbridge
+  repository: null
+  install:
+    windows: https://www.kimi.com/zh-cn/help/kimi-webbridge/kimi-webbridge-introduction
+    macos_linux: https://www.kimi.com/zh-cn/help/kimi-webbridge/kimi-webbridge-introduction
+    extension: https://chromewebstore.google.com/detail/kimi-webbridge/fldmhceldgbpfpkbgopacenieobmligc
+  license: 未声明
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Chrome 或 Edge 扩展
+  - Kimi WebBridge 本地服务
+  risk_notes: 可访问真实登录态并执行网页操作；涉及提交、付款、发布和账号设置时必须再次确认。
+  verified_on: '2026-07-14'
+- id: deep-research
+  name: Deep Research
+  category: research
+  distribution: external
+  purpose: 用多角度检索、来源分级、交叉核验和引用组织完成系统化网络调研。
+  upstream: https://github.com/bytedance/deer-flow/tree/main/skills/public/deep-research
+  repository: https://github.com/bytedance/deer-flow
+  install:
+    codex: npx skills add bytedance/deer-flow --skill deep-research -g -a codex
+  license: MIT
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - 可用的网络搜索与网页读取工具
+  risk_notes: 搜索结果可能过时、带偏见或包含提示注入；关键结论应回到一手来源交叉核验。
+  verified_on: '2026-07-14'
+- id: agent-browser
+  name: Agent Browser
+  category: browser-automation
+  distribution: external
+  purpose: 通过可访问性树和稳定元素引用执行浏览器、Electron 与网页测试自动化。
+  upstream: https://agent-browser.dev
+  repository: https://github.com/vercel-labs/agent-browser
+  install:
+    npm: npm install -g agent-browser && agent-browser install
+  license: Apache-2.0
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Chrome for Testing 或兼容浏览器
+  risk_notes: 可复用浏览器配置与登录态；脚本执行和云浏览器提供商会扩大凭据与数据暴露面。
+  verified_on: '2026-07-14'
+- id: find-docs
+  name: Find Docs
+  category: developer-research
+  distribution: external
+  purpose: 通过 Context7 查询最新的开发库、SDK、CLI 和框架文档与示例。
+  upstream: https://github.com/upstash/context7/tree/master/skills/find-docs
+  repository: https://github.com/upstash/context7
+  install:
+    npm: npm install -g ctx7@latest
+    codex: npx skills add upstash/context7 --skill find-docs -g -a codex
+  license: MIT
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Node.js
+  - Context7 服务
+  risk_notes: 第三方索引可能滞后或缺页；涉及安全和迁移的结论仍应链接并核对官方文档。
+  verified_on: '2026-07-14'
+- id: grill-me
+  name: Grill Me
+  category: planning
+  distribution: external
+  purpose: 逐个追问并压力测试计划、设计和未决决策。
+  upstream: https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me
+  repository: https://github.com/mattpocock/skills
+  install:
+    codex: npx skills add mattpocock/skills --skill grill-me -g -a codex
+  license: MIT
+  status: maintained
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 强交互流程会增加沟通轮次；不适合用户已经给出完整且已批准规格的机械任务。
+  verified_on: '2026-07-14'
+- id: improve-codebase-architecture
+  name: Improve Codebase Architecture
+  category: architecture
+  distribution: external
+  purpose: 扫描代码库中的浅模块和摩擦点，生成可视报告并推进架构深化。
+  upstream: https://github.com/mattpocock/skills/tree/main/skills/engineering/improve-codebase-architecture
+  repository: https://github.com/mattpocock/skills
+  install:
+    codex: npx skills add mattpocock/skills --skill improve-codebase-architecture -g -a codex
+  license: MIT
+  status: maintained
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - codebase-design
+  - domain-modeling（建议）
+  risk_notes: 架构建议需要结合领域约束和 ADR；扫描结果不等于授权大规模重构。
+  verified_on: '2026-07-14'
+- id: style-alchemy
+  name: Style Alchemy
+  category: writing
+  distribution: external
+  purpose: 分析文章风格并生成可复用的风格档案和写作 Skill。
+  upstream: 本机自有，尚未公开
+  repository: null
+  install:
+    repository: 暂不提供；等待来源、许可证和样本合规审查。
+  license: 未声明
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - 多篇合法取得的文章样本
+  risk_notes: 模仿在世作者或受保护作品可能引发版权、署名和误导风险，应侧重抽象特征而非复制表达。
+  verified_on: '2026-07-14'
+- id: work-reporting
+  name: Work Reporting
+  category: reporting
+  distribution: external
+  purpose: 从本地证据生成可审计的中文日报、周报、月报和真实活动日志。
+  upstream: 本机自有，尚未公开
+  repository: null
+  install:
+    repository: 暂不提供；需要先去除个人路径、组织规则和敏感数据假设。
+  license: 未声明
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - 工作区内的真实活动证据
+  risk_notes: 可能处理聊天、娱乐、测试和内部工作记录；公开分享前必须去标识化并区分内部、外部版本。
+  verified_on: '2026-07-14'
+- id: security-best-practices
+  name: Security Best Practices
+  category: security
+  distribution: vendored
+  purpose: 对 Python、JavaScript/TypeScript 和 Go 项目执行语言与框架专项安全审查。
+  upstream: https://github.com/openai/skills/tree/main/skills/.curated/security-best-practices
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/security-best-practices
+  install:
+    repository: 暂不建议从本仓库安装；本目录是本机许可核验后的归档副本。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 归档副本不会自动跟随上游更新；只覆盖部分语言和框架，不能代替威胁建模、依赖扫描、渗透测试和人工安全评审。
+  verified_on: '2026-09-15'
+- id: playwright-interactive
+  name: Playwright Interactive
+  category: browser-testing
+  distribution: vendored
+  purpose: 在持久 Playwright 会话中迭代调试 Web 或 Electron 应用并完成视觉验收。
+  upstream: https://github.com/openai/skills/tree/main/skills/.curated/playwright-interactive
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/playwright-interactive
+  install:
+    repository: 暂不建议从本仓库安装；本目录是本机许可核验后的归档副本。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - js_repl
+  - Playwright
+  - Chromium（网页测试）
+  risk_notes: 归档副本不会自动跟随上游更新；当前流程可能要求降低沙箱限制，只应在可信项目和隔离环境中启用。
+  verified_on: '2026-09-15'
+- id: markdown-writer
+  name: Markdown Writer
+  category: writing
+  distribution: external
+  purpose: 生成结构清晰的 README、API 文档、操作指南、变更日志和技术 Wiki。
+  upstream: https://github.com/TerminalSkills/skills/tree/main/skills/markdown-writer
+  repository: https://github.com/TerminalSkills/skills
+  install:
+    codex: npx skills add TerminalSkills/skills --skill markdown-writer -g -a codex
+  license: Apache-2.0
+  status: maintained
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 示例中的命令和 URL 是模板内容，不能在未核对项目上下文时直接执行或发布。
+  verified_on: '2026-07-14'
+- id: task-package-delivery
+  name: Task Package Delivery
+  category: delivery-governance
+  distribution: vendored
+  purpose: 把带范围和验收标准的任务包作为交付合同，完成实施、逐项验证、差异审查和有界收敛。
+  upstream: https://github.com/T3L000/codex-skills/tree/main/skills/task-package-delivery
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/task-package-delivery
+  install:
+    repository: .\scripts\install-skill.ps1 -Name task-package-delivery
+  license: 未声明（本仓库原创）
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 任务包扩大验证深度但不扩大提交、推送、发布或破坏性操作权限；必须保留用户已有改动。
+  verified_on: '2026-07-29'
+- id: neat-freak
+  name: Neat Freak
+  category: knowledge-governance
+  distribution: external
+  purpose: 在开发或发布收尾时对齐代码、运行态、文档、规则、获准维护的记忆和工作区残留。
+  upstream: https://github.com/KKKKhazix/khazix-skills/tree/main/neat-freak
+  repository: https://github.com/KKKKhazix/khazix-skills
+  install:
+    repository: npx skills add KKKKhazix/khazix-skills --skill neat-freak -g -a codex
+  license: MIT（上游）
+  status: maintained
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Git 和 rg（建议）
+  - Bash（可选，只用于 audit-inventory.sh）
+  risk_notes: 可发现删除和清场候选，但未获得用户看过完整汇报后的明确确认前不得执行破坏性清理。
+  verified_on: '2026-07-29'
+- id: research-governance
+  name: Research Governance
+  category: research
+  distribution: vendored
+  purpose: 把会影响 WBS、路线图、架构或供应商决策的调研转成可审计证据、Gate、停止条件和独立复审记录。
+  upstream: https://github.com/T3L000/codex-skills/tree/main/skills/research-governance
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/research-governance
+  install:
+    repository: .\scripts\install-skill.ps1 -Name research-governance
+  license: 未声明（本仓库原创）
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - deep-research（外部调研时）
+  - kimi-webbridge（真实浏览器场景）
+  risk_notes: 调研通过不等于技术选型、实施、采购或生产授权；动态事实必须记录快照和失效条件。
+  verified_on: '2026-07-29'
+- id: coordinate-review-repair-loops
+  name: Coordinate Review and Repair Loops
+  category: project-control
+  distribution: vendored
+  purpose: 复用既有实施和独立审查任务，通过事件驱动等待协调修复、delta 复审、集成和控制面收口。
+  upstream: https://github.com/T3L000/codex-skills/tree/main/skills/coordinate-review-repair-loops
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/coordinate-review-repair-loops
+  install:
+    repository: .\scripts\install-skill.ps1 -Name coordinate-review-repair-loops
+  license: 未声明（本仓库原创）
+  status: maintained
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - task-package-delivery
+  - open-code-review-delegate（Git 独立审查且项目规则要求时）
+  - Codex 任务协调工具
+  risk_notes: 只适用于用户明确授权的多任务持续协调；不得从“盯着直到完成”推导提交、推送、合并、文档改写或清理权限。
+  verified_on: '2026-07-29'
+- id: open-code-review-delegate
+  name: Open Code Review Delegation Mode
+  category: code-review
+  distribution: external
+  purpose: 让 OCR 只负责确定性的文件筛选和规则解析，由宿主 Agent 使用自身模型完成独立代码审查。
+  upstream: https://github.com/alibaba/open-code-review
+  repository: https://github.com/alibaba/open-code-review
+  install:
+    npm: npm install -g @alibaba-group/open-code-review
+    codex: 按上游 Delegation Mode 文档安装 Skill；不要复制本仓库外的陈旧副本。
+  license: Apache-2.0
+  status: recommended
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - OCR CLI 1.7.11 或更高版本
+  - Git
+  risk_notes: preview/rule 只提供确定性审查范围和规则，不替代宿主 Agent 的业务合同复核、反例验证和独立结论。
+  verified_on: '2026-07-29'
+- id: audience-adapter
+  name: Audience Adapter
+  category: communication
+  distribution: vendored
+  purpose: 根据管理层、技术团队或运营受众调整汇报材料的粒度、语言和侧重点。
+  upstream: 本机安装副本，来源待核验
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/audience-adapter
+  install:
+    repository: 暂不建议安装；等待来源与兼容性复核。
+  license: MIT
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 只能调整表达方式，不能替代事实核验、审批或利益相关方确认。
+  verified_on: '2026-09-15'
+- id: cloudflare-deploy
+  name: Cloudflare Deploy
+  category: deployment
+  distribution: vendored
+  purpose: 将应用和基础设施部署到 Cloudflare Workers、Pages 等服务。
+  upstream: https://github.com/openai/skills
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/cloudflare-deploy
+  install:
+    repository: 暂不建议安装；优先使用上游当前版本。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Cloudflare 账号与 CLI
+  risk_notes: 部署会改变外部服务状态；示例凭据均须替换为用户自己的安全配置。
+  verified_on: '2026-09-15'
+- id: deep-probe
+  name: Deep Probe
+  category: product-thinking
+  distribution: vendored
+  purpose: 通过逐分支追问压力测试方案、设计与关键假设。
+  upstream: 本机安装副本，作者标记为 Matt Pocock，具体仓库待核验
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/deep-probe
+  install:
+    repository: 暂不建议安装；等待上游来源复核。
+  license: MIT
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 连环追问用于暴露未知项，不等于已经取得用户决策或实施授权。
+  verified_on: '2026-09-15'
+- id: dws
+  name: DingTalk Workspace CLI
+  category: productivity
+  distribution: vendored
+  purpose: 管理钉钉文档、云盘、表格、日历、通讯录、消息、审批等工作空间能力。
+  upstream: DingTalk Workspace CLI，具体公开仓库待核验
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/dws
+  install:
+    repository: 暂不建议安装；需要钉钉账号、CLI 与权限配置。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - DingTalk Workspace CLI
+  - 钉钉账号与相应权限
+  risk_notes: 可接触组织通讯录、消息、文档和审批数据；写操作必须确认目标和权限。
+  verified_on: '2026-09-15'
+- id: idea-to-prd
+  name: Idea to PRD
+  category: product-management
+  distribution: vendored
+  purpose: 将一句话需求扩展为用户故事、功能清单、优先级和验收标准。
+  upstream: 本机安装副本，来源待核验
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/idea-to-prd
+  install:
+    repository: 暂不建议安装；等待来源与实践效果复核。
+  license: MIT
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 自动生成的 PRD 仍需业务负责人确认范围、约束和成功指标。
+  verified_on: '2026-09-15'
+- id: jupyter-notebook
+  name: Jupyter Notebook
+  category: developer-tools
+  distribution: vendored
+  purpose: 创建和编辑用于实验、探索与教程的 Jupyter Notebook。
+  upstream: https://github.com/openai/skills
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/jupyter-notebook
+  install:
+    repository: 暂不建议安装；优先使用上游当前版本。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Python
+  - Jupyter
+  risk_notes: Notebook 可能包含大体积输出、执行副作用或敏感数据，提交前应清理。
+  verified_on: '2026-09-15'
+- id: netlify-deploy
+  name: Netlify Deploy
+  category: deployment
+  distribution: vendored
+  purpose: 使用 Netlify CLI 部署、托管或关联 Web 项目。
+  upstream: https://github.com/openai/skills
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/netlify-deploy
+  install:
+    repository: 暂不建议安装；优先使用上游当前版本。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Netlify CLI 与账号
+  risk_notes: 生产部署和域名变更会影响外部用户，执行前需要确认环境与目标站点。
+  verified_on: '2026-09-15'
+- id: pdf
+  name: PDF
+  category: documents
+  distribution: vendored
+  purpose: 读取、创建、渲染并校验版式敏感的 PDF 文件。
+  upstream: https://github.com/openai/skills
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/pdf
+  install:
+    repository: 暂不建议安装；优先使用 Codex 官方插件版本。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Python PDF 工具
+  - Poppler（渲染时）
+  risk_notes: 处理简历、合同等 PDF 时应避免把个人或业务敏感信息提交到公开仓库。
+  verified_on: '2026-09-15'
+- id: playwright
+  name: Playwright
+  category: browser-testing
+  distribution: vendored
+  purpose: 通过 Playwright CLI 自动化网页导航、表单、截图和 UI 流程验证。
+  upstream: https://github.com/openai/skills
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/playwright
+  install:
+    repository: 暂不建议安装；优先使用上游当前版本。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Playwright
+  - 浏览器运行时
+  risk_notes: 浏览器会接触登录态和外部页面；提交、付款、发布等高影响操作需要单独确认。
+  verified_on: '2026-09-15'
+- id: render-deploy
+  name: Render Deploy
+  category: deployment
+  distribution: vendored
+  purpose: 分析项目、生成 Render Blueprint 并辅助部署到 Render。
+  upstream: https://github.com/openai/skills
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/render-deploy
+  install:
+    repository: 暂不建议安装；优先使用上游当前版本。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Render 账号
+  risk_notes: Blueprint 和部署配置可能产生费用或暴露环境变量，发布前需要人工复核。
+  verified_on: '2026-09-15'
+- id: screenshot
+  name: Screenshot
+  category: computer-use
+  distribution: vendored
+  purpose: 在工具内截图能力不可用时捕获桌面、窗口或指定区域。
+  upstream: https://github.com/openai/skills
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/screenshot
+  install:
+    repository: 暂不建议安装；优先使用上游当前版本。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 截图可能捕获账号、通知和个人信息，分享或提交前必须检查画面内容。
+  verified_on: '2026-09-15'
+- id: security-ownership-map
+  name: Security Ownership Map
+  category: security
+  distribution: vendored
+  purpose: 基于 Git 历史分析敏感代码所有权、关键人员和 bus factor。
+  upstream: https://github.com/openai/skills
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/security-ownership-map
+  install:
+    repository: 暂不建议安装；优先使用上游当前版本。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Git
+  - Python
+  risk_notes: 输出可能暴露人员关系和敏感模块归属，应限制传播范围并结合组织语境解释。
+  verified_on: '2026-09-15'
+- id: security-threat-model
+  name: Security Threat Model
+  category: security
+  distribution: vendored
+  purpose: 基于仓库架构识别资产、信任边界、攻击路径和缓解措施。
+  upstream: https://github.com/openai/skills
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/security-threat-model
+  install:
+    repository: 暂不建议安装；优先使用上游当前版本。
+  license: Apache-2.0
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 威胁模型依赖当前架构和攻击面，不等同于渗透测试或安全认证。
+  verified_on: '2026-09-15'
+- id: vercel-deploy
+  name: Vercel Deploy
+  category: deployment
+  distribution: vendored
+  purpose: 将应用部署到 Vercel 并返回预览或生产访问地址。
+  upstream: 本机安装副本，具体上游待核验
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/vercel-deploy
+  install:
+    repository: 暂不建议安装；等待上游来源和当前安装方式复核。
+  license: MIT
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies:
+  - Vercel 账号与 CLI
+  risk_notes: 部署可能影响公开站点、域名和费用；必须确认目标环境及授权范围。
+  verified_on: '2026-09-15'
+- id: weighted-scoring
+  name: Weighted Scoring
+  category: decision-making
+  distribution: vendored
+  purpose: 用加权评分矩阵和敏感性分析比较技术、供应商与方案。
+  upstream: 本机安装副本，来源待核验
+  repository: https://github.com/T3L000/codex-skills/tree/main/skills/weighted-scoring
+  install:
+    repository: 暂不建议安装；等待来源与实践效果复核。
+  license: MIT
+  status: unverified
+  replaced_by: null
+  replacement_reason: null
+  dependencies: []
+  risk_notes: 分值不能代替证据质量；权重和评分假设需要由决策者确认并做敏感性分析。
+  verified_on: '2026-09-15'
